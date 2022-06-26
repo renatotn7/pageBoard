@@ -1,0 +1,15 @@
+{
+  "applications": ["pageBoard"],
+  "changelogDate": "20220615215840",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "page_board",
+  "fields": [],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "PageBoard",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [],
+  "service": "no"
+}

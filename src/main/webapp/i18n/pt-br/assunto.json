@@ -1,0 +1,25 @@
+{
+  "pageBoardApp": {
+    "assunto": {
+      "home": {
+        "title": "Assuntos",
+        "refreshListLabel": "Atualizar lista",
+        "createLabel": "Criar novo Assunto",
+        "createOrEditLabel": "Criar ou editar Assunto",
+        "notFound": "Nenhum Assunto encontrado"
+      },
+      "created": "Um novo Assunto foi criado com o identificador {{ param }}",
+      "updated": "Um Assunto foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Assunto foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Assunto {{ id }}?"
+      },
+      "detail": {
+        "title": "Assunto"
+      },
+      "id": "ID",
+      "nome": "Nome",
+      "livro": "Livro"
+    }
+  }
+}

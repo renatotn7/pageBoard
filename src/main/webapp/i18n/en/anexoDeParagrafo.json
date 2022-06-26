@@ -1,0 +1,26 @@
+{
+  "pageBoardApp": {
+    "anexoDeParagrafo": {
+      "home": {
+        "title": "Anexo De Paragrafos",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Anexo De Paragrafo",
+        "createOrEditLabel": "Create or edit a Anexo De Paragrafo",
+        "notFound": "No Anexo De Paragrafos found"
+      },
+      "created": "A new Anexo De Paragrafo is created with identifier {{ param }}",
+      "updated": "A Anexo De Paragrafo is updated with identifier {{ param }}",
+      "deleted": "A Anexo De Paragrafo is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Anexo De Paragrafo {{ id }}?"
+      },
+      "detail": {
+        "title": "Anexo De Paragrafo"
+      },
+      "id": "ID",
+      "tipo": "Tipo",
+      "value": "Value",
+      "paragrafo": "Paragrafo"
+    }
+  }
+}

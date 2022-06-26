@@ -1,0 +1,45 @@
+{
+  "applications": ["pageBoard"],
+  "changelogDate": "20220615220640",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "usuario",
+  "fields": [
+    {
+      "fieldName": "login",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "foto",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Usuario",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "nome",
+      "otherEntityName": "pessoa",
+      "otherEntityRelationshipName": "usuario",
+      "ownerSide": true,
+      "relationshipName": "pessoa",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityField": "nome",
+      "otherEntityName": "projeto",
+      "otherEntityRelationshipName": "usuario",
+      "relationshipName": "projeto",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "no"
+}

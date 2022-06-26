@@ -1,0 +1,67 @@
+{
+  "applications": ["pageBoard"],
+  "changelogDate": "20220615215540",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "endereco",
+  "fields": [
+    {
+      "fieldName": "logradouro",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "numero",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "complemento",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "bairro",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "cEP",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Endereco",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "nome",
+      "otherEntityName": "cidade",
+      "otherEntityRelationshipName": "endereco",
+      "ownerSide": true,
+      "relationshipName": "cidade",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityField": "nome",
+      "otherEntityName": "estado",
+      "otherEntityRelationshipName": "endereco",
+      "ownerSide": true,
+      "relationshipName": "estado",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityField": "nome",
+      "otherEntityName": "pais",
+      "otherEntityRelationshipName": "endereco",
+      "ownerSide": true,
+      "relationshipName": "pais",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "pessoa",
+      "otherEntityRelationshipName": "endereco",
+      "relationshipName": "pessoa",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

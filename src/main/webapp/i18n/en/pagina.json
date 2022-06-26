@@ -1,0 +1,29 @@
+{
+  "pageBoardApp": {
+    "pagina": {
+      "home": {
+        "title": "Paginas",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Pagina",
+        "createOrEditLabel": "Create or edit a Pagina",
+        "notFound": "No Paginas found"
+      },
+      "created": "A new Pagina is created with identifier {{ param }}",
+      "updated": "A Pagina is updated with identifier {{ param }}",
+      "deleted": "A Pagina is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Pagina {{ id }}?"
+      },
+      "detail": {
+        "title": "Pagina"
+      },
+      "id": "ID",
+      "numero": "Numero",
+      "texto": "Texto",
+      "planoDeAula": "Plano De Aula",
+      "imagem": "Imagem",
+      "paragrafo": "Paragrafo",
+      "livro": "Livro"
+    }
+  }
+}

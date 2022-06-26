@@ -1,0 +1,21 @@
+{
+  "applications": ["pageBoard"],
+  "changelogDate": "20220615220540",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "resposta",
+  "fields": [
+    {
+      "fieldName": "texto",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Resposta",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [],
+  "service": "no"
+}

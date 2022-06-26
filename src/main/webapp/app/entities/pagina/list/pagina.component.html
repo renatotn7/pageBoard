@@ -1,0 +1,85 @@
+<div>
+  <h2 id="page-heading" data-cy="PaginaHeading">
+    <span jhiTranslate="pageBoardApp.pagina.home.title">Paginas</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="pageBoardApp.pagina.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-pagina"
+        [routerLink]="['/pagina/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="pageBoardApp.pagina.home.createLabel"> Create a new Pagina </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="paginas?.length === 0">
+    <span jhiTranslate="pageBoardApp.pagina.home.notFound">No paginas found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="paginas && paginas.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="pageBoardApp.pagina.numero">Numero</span></th>
+          <th scope="col"><span jhiTranslate="pageBoardApp.pagina.texto">Texto</span></th>
+          <th scope="col"><span jhiTranslate="pageBoardApp.pagina.planoDeAula">Plano De Aula</span></th>
+          <th scope="col"><span jhiTranslate="pageBoardApp.pagina.imagem">Imagem</span></th>
+          <th scope="col"><span jhiTranslate="pageBoardApp.pagina.livro">Livro</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pagina of paginas; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/pagina', pagina.id, 'view']">{{ pagina.id }}</a>
+          </td>
+          <td>{{ pagina.numero }}</td>
+          <td>{{ pagina.texto }}</td>
+          <td>{{ pagina.planoDeAula }}</td>
+          <td>
+            <a *ngIf="pagina.imagem" (click)="openFile(pagina.imagem, pagina.imagemContentType)">
+              <img [src]="'data:' + pagina.imagemContentType + ';base64,' + pagina.imagem" style="max-height: 30px" alt="pagina image" />
+            </a>
+            <span *ngIf="pagina.imagem">{{ pagina.imagemContentType }}, {{ byteSize(pagina.imagem) }}</span>
+          </td>
+          <td>
+            <div *ngIf="pagina.livro">
+              <a [routerLink]="['/livro', pagina.livro?.id, 'view']">{{ pagina.livro?.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/pagina', pagina.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/pagina', pagina.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(pagina)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

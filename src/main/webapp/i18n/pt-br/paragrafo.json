@@ -1,0 +1,28 @@
+{
+  "pageBoardApp": {
+    "paragrafo": {
+      "home": {
+        "title": "Paragrafos",
+        "refreshListLabel": "Atualizar lista",
+        "createLabel": "Criar novo Paragrafo",
+        "createOrEditLabel": "Criar ou editar Paragrafo",
+        "notFound": "Nenhum Paragrafo encontrado"
+      },
+      "created": "Um novo Paragrafo foi criado com o identificador {{ param }}",
+      "updated": "Um Paragrafo foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Paragrafo foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Paragrafo {{ id }}?"
+      },
+      "detail": {
+        "title": "Paragrafo"
+      },
+      "id": "ID",
+      "numero": "Numero",
+      "texto": "Texto",
+      "resumo": "Resumo",
+      "pergunta": "Pergunta",
+      "pagina": "Pagina"
+    }
+  }
+}

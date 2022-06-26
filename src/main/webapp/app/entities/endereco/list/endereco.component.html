@@ -1,0 +1,110 @@
+<div>
+  <h2 id="page-heading" data-cy="EnderecoHeading">
+    <span jhiTranslate="pageBoardApp.endereco.home.title">Enderecos</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="pageBoardApp.endereco.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-endereco"
+        [routerLink]="['/endereco/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="pageBoardApp.endereco.home.createLabel"> Create a new Endereco </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="enderecos?.length === 0">
+    <span jhiTranslate="pageBoardApp.endereco.home.notFound">No enderecos found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="enderecos && enderecos.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="pageBoardApp.endereco.logradouro">Logradouro</span></th>
+          <th scope="col"><span jhiTranslate="pageBoardApp.endereco.numero">Numero</span></th>
+          <th scope="col"><span jhiTranslate="pageBoardApp.endereco.complemento">Complemento</span></th>
+          <th scope="col"><span jhiTranslate="pageBoardApp.endereco.bairro">Bairro</span></th>
+          <th scope="col"><span jhiTranslate="pageBoardApp.endereco.cEP">C EP</span></th>
+          <th scope="col"><span jhiTranslate="pageBoardApp.endereco.cidade">Cidade</span></th>
+          <th scope="col"><span jhiTranslate="pageBoardApp.endereco.estado">Estado</span></th>
+          <th scope="col"><span jhiTranslate="pageBoardApp.endereco.pais">Pais</span></th>
+          <th scope="col"><span jhiTranslate="pageBoardApp.endereco.pessoa">Pessoa</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let endereco of enderecos; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/endereco', endereco.id, 'view']">{{ endereco.id }}</a>
+          </td>
+          <td>{{ endereco.logradouro }}</td>
+          <td>{{ endereco.numero }}</td>
+          <td>{{ endereco.complemento }}</td>
+          <td>{{ endereco.bairro }}</td>
+          <td>{{ endereco.cEP }}</td>
+          <td>
+            <div *ngIf="endereco.cidade">
+              <a [routerLink]="['/cidade', endereco.cidade?.id, 'view']">{{ endereco.cidade?.nome }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="endereco.estado">
+              <a [routerLink]="['/estado', endereco.estado?.id, 'view']">{{ endereco.estado?.nome }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="endereco.pais">
+              <a [routerLink]="['/pais', endereco.pais?.id, 'view']">{{ endereco.pais?.nome }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="endereco.pessoa">
+              <a [routerLink]="['/pessoa', endereco.pessoa?.id, 'view']">{{ endereco.pessoa?.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/endereco', endereco.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/endereco', endereco.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(endereco)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

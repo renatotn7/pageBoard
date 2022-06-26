@@ -1,0 +1,33 @@
+{
+  "applications": ["pageBoard"],
+  "changelogDate": "20220615220240",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "pergunta",
+  "fields": [
+    {
+      "fieldName": "questao",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "resposta",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Pergunta",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "paragrafo",
+      "otherEntityRelationshipName": "pergunta",
+      "relationshipName": "paragrafo",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

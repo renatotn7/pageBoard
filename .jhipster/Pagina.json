@@ -1,0 +1,47 @@
+{
+  "applications": ["pageBoard"],
+  "changelogDate": "20220615215940",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "pagina",
+  "fields": [
+    {
+      "fieldName": "numero",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "texto",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "planoDeAula",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "imagem",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Pagina",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "paragrafo",
+      "otherEntityRelationshipName": "pagina",
+      "relationshipName": "paragrafo",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "livro",
+      "otherEntityRelationshipName": "pagina",
+      "relationshipName": "livro",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

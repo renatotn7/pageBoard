@@ -1,0 +1,24 @@
+{
+  "applications": ["pageBoard"],
+  "changelogDate": "20220615220040",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "pais",
+  "fields": [
+    {
+      "fieldName": "nome",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "sigla",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Pais",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [],
+  "service": "no"
+}

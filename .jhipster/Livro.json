@@ -1,0 +1,60 @@
+{
+  "applications": ["pageBoard"],
+  "changelogDate": "20220615215740",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "livro",
+  "fields": [
+    {
+      "fieldName": "nomeLivro",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "editora",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "autor",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "anoDePublicacao",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "tags",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Livro",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "numero",
+      "otherEntityName": "pagina",
+      "otherEntityRelationshipName": "livro",
+      "relationshipName": "pagina",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "nome",
+      "otherEntityName": "projeto",
+      "otherEntityRelationshipName": "livro",
+      "ownerSide": true,
+      "relationshipName": "projeto",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityField": "nome",
+      "otherEntityName": "assunto",
+      "otherEntityRelationshipName": "livro",
+      "relationshipName": "assunto",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

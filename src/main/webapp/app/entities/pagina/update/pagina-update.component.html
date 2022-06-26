@@ -1,0 +1,107 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-pagina-heading" data-cy="PaginaCreateUpdateHeading" jhiTranslate="pageBoardApp.pagina.home.createOrEditLabel">
+        Create or edit a Pagina
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pageBoardApp.pagina.numero" for="field_numero">Numero</label>
+          <input type="number" class="form-control" name="numero" id="field_numero" data-cy="numero" formControlName="numero" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pageBoardApp.pagina.texto" for="field_texto">Texto</label>
+          <textarea class="form-control" name="texto" id="field_texto" data-cy="texto" formControlName="texto"></textarea>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pageBoardApp.pagina.planoDeAula" for="field_planoDeAula">Plano De Aula</label>
+          <input
+            type="text"
+            class="form-control"
+            name="planoDeAula"
+            id="field_planoDeAula"
+            data-cy="planoDeAula"
+            formControlName="planoDeAula"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pageBoardApp.pagina.imagem" for="field_imagem">Imagem</label>
+          <div>
+            <img
+              [src]="'data:' + editForm.get('imagemContentType')!.value + ';base64,' + editForm.get('imagem')!.value"
+              style="max-height: 100px"
+              *ngIf="editForm.get('imagem')!.value"
+              alt="pagina image"
+            />
+            <div *ngIf="editForm.get('imagem')!.value" class="form-text text-danger clearfix">
+              <span class="pull-start">{{ editForm.get('imagemContentType')!.value }}, {{ byteSize(editForm.get('imagem')!.value) }}</span>
+              <button
+                type="button"
+                (click)="clearInputImage('imagem', 'imagemContentType', 'file_imagem')"
+                class="btn btn-secondary btn-xs pull-end"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_imagem"
+              data-cy="imagem"
+              (change)="setFileData($event, 'imagem', true)"
+              accept="image/*"
+              jhiTranslate="entity.action.addimage"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="imagem" id="field_imagem" data-cy="imagem" formControlName="imagem" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="imagemContentType"
+            id="field_imagemContentType"
+            formControlName="imagemContentType"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pageBoardApp.pagina.livro" for="field_livro">Livro</label>
+          <select class="form-control" id="field_livro" data-cy="livro" name="livro" formControlName="livro">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="livroOption.id === editForm.get('livro')!.value?.id ? editForm.get('livro')!.value : livroOption"
+              *ngFor="let livroOption of livrosSharedCollection; trackBy: trackLivroById"
+            >
+              {{ livroOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

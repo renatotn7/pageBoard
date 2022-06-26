@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql, mariadb"/>
+    <property name="clobType" value="longvarchar" dbms="h2"/>
+    <property name="clobType" value="clob" dbms="mysql, oracle, mssql, mariadb, postgresql"/>
+    <property name="uuidType" value="uuid" dbms="h2, postgresql"/>
+    <property name="datetimeType" value="datetime(6)" dbms="mysql, mariadb"/>
+    <property name="datetimeType" value="datetime" dbms="oracle, mssql, postgresql, h2"/>
+
+    <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220615215240_added_entity_AnexoDeParagrafo.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220615215340_added_entity_Assunto.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220615215440_added_entity_Cidade.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220615215540_added_entity_Endereco.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220615215640_added_entity_Estado.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220615215740_added_entity_Livro.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220615215840_added_entity_PageBoard.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220615215940_added_entity_Pagina.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220615220040_added_entity_Pais.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220615220140_added_entity_Paragrafo.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220615220240_added_entity_Pergunta.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220615220340_added_entity_Pessoa.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220615220440_added_entity_Projeto.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220615220540_added_entity_Resposta.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220615220640_added_entity_Usuario.xml" relativeToChangelogFile="false"/>
+    <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20220615215240_added_entity_constraints_AnexoDeParagrafo.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220615215440_added_entity_constraints_Cidade.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220615215540_added_entity_constraints_Endereco.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220615215640_added_entity_constraints_Estado.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220615215740_added_entity_constraints_Livro.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220615215940_added_entity_constraints_Pagina.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220615220140_added_entity_constraints_Paragrafo.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220615220240_added_entity_constraints_Pergunta.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220615220440_added_entity_constraints_Projeto.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220615220640_added_entity_constraints_Usuario.xml" relativeToChangelogFile="false"/>
+    <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
+    <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
+</databaseChangeLog>

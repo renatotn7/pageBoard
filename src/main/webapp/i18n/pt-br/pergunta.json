@@ -1,0 +1,26 @@
+{
+  "pageBoardApp": {
+    "pergunta": {
+      "home": {
+        "title": "Perguntas",
+        "refreshListLabel": "Atualizar lista",
+        "createLabel": "Criar novo Pergunta",
+        "createOrEditLabel": "Criar ou editar Pergunta",
+        "notFound": "Nenhum Pergunta encontrado"
+      },
+      "created": "Um novo Pergunta foi criado com o identificador {{ param }}",
+      "updated": "Um Pergunta foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Pergunta foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Pergunta {{ id }}?"
+      },
+      "detail": {
+        "title": "Pergunta"
+      },
+      "id": "ID",
+      "questao": "Questao",
+      "resposta": "Resposta",
+      "paragrafo": "Paragrafo"
+    }
+  }
+}

@@ -1,0 +1,143 @@
+application {
+  config {
+    applicationType monolith
+    authenticationType jwt
+    baseName pageBoard
+    blueprints []
+    buildTool maven
+    cacheProvider no
+    clientFramework angularX
+    clientPackageManager npm
+    clientTheme cerulean
+    creationTimestamp 1655329900435
+    databaseType sql
+    devDatabaseType h2Disk
+    dtoSuffix DTO
+    enableGradleEnterprise false
+    enableHibernateCache false
+    enableSwaggerCodegen true
+    enableTranslation true
+    gradleEnterpriseHost ""
+    jhiPrefix jhi
+    jhipsterVersion "7.8.1"
+    jwtSecretKey "NWVkZjNjMTg3ZjRjYTY2Y2E3NjU3Zjc1M2NjNDk2MzY2ZjU4MTA3NzIwZmY1MDc5YTc5YTE0ZDlmY2ZkYWMyMThiOTEzYWExNDdjY2I2ZjZjMTBhZjNlMTc2MGFlMjE3MjYxM2I3MjNjMWM5MzliMDZiNjhmMThkMTYxZmU3N2Q="
+    languages [pt-br, en]
+    messageBroker false
+    nativeLanguage pt-br
+    otherModules []
+    packageName br.com.rnati.pageboard
+    prodDatabaseType postgresql
+    reactive true
+    searchEngine false
+    serverPort 8082
+    serviceDiscoveryType no
+    skipClient false
+    skipServer false
+	skipUserManagement false
+    testFrameworks []
+    websocket false
+    withAdminUi true
+  }
+
+  entities AnexoDeParagrafo,  Assunto, Cidade, Endereco, Estado, Livro, PageBoard, Pagina, Pais, Paragrafo, Pergunta, Pessoa, Projeto, Resposta, Usuario
+}
+
+entity AnexoDeParagrafo {
+  tipo TipoAnexoDeParagrafo
+  value TextBlob
+}
+
+entity Assunto {
+  nome String
+}
+entity Cidade {
+  nome String
+}
+entity Endereco {
+  logradouro String
+  numero Integer
+  complemento String
+  bairro String
+  cEP String
+}
+entity Estado {
+  nome String
+  uf String
+}
+entity Livro {
+  nomeLivro String
+  editora String
+  autor String
+  anoDePublicacao Integer
+  tags TextBlob
+}
+entity PageBoard
+entity Pagina {
+  numero Integer
+  texto TextBlob
+  planoDeAula String
+  imagem ImageBlob
+}
+entity Pais {
+  nome String
+  sigla String
+}
+entity Paragrafo {
+  numero Integer
+  texto TextBlob
+  resumo TextBlob
+}
+entity Pergunta {
+  questao TextBlob
+  resposta TextBlob
+}
+entity Pessoa {
+  nome String
+  dataDeNascimento LocalDate
+}
+entity Projeto {
+  nome String
+  descricao String
+  imagem ImageBlob
+  tags TextBlob
+}
+entity Resposta {
+  texto TextBlob
+}
+entity Usuario {
+  login String
+  email String
+  foto ImageBlob
+}
+enum TipoAnexoDeParagrafo {
+  EXPLICACAO,
+  SUMARIO,
+  RESUMO,
+  PLANO_DE_AULA
+}
+
+relationship OneToOne {
+  Cidade{estado(nome)} to Estado
+  Endereco{cidade(nome)} to Cidade
+  Endereco{estado(nome)} to Estado
+  Endereco{pais(nome)} to Pais
+  Estado{pais(nome)} to Pais
+  Usuario{pessoa(nome)} to Pessoa
+}
+relationship OneToMany {
+  Pessoa{endereco} to Endereco{pessoa}
+  Assunto{livro(nomeLivro)} to Livro{assunto(nome)}
+  Livro{pagina(numero)} to Pagina{livro}
+  Pagina{paragrafo} to Paragrafo{pagina(numero)}
+  Paragrafo{pergunta(questao)} to Pergunta{paragrafo}
+  Usuario{projeto(nome)} to Projeto{usuario}
+}
+relationship ManyToOne {
+  AnexoDeParagrafo{paragrafo} to Paragrafo
+}
+relationship ManyToMany {
+  Livro{projeto(nome)} to Projeto{livro(nomeLivro)}
+}
+
+paginate AnexoDeParagrafo with pagination
+

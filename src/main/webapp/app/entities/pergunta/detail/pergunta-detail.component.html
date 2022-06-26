@@ -1,0 +1,42 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="pergunta">
+      <h2 data-cy="perguntaDetailsHeading"><span jhiTranslate="pageBoardApp.pergunta.detail.title">Pergunta</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ pergunta.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="pageBoardApp.pergunta.questao">Questao</span></dt>
+        <dd>
+          <span>{{ pergunta.questao }}</span>
+        </dd>
+        <dt><span jhiTranslate="pageBoardApp.pergunta.resposta">Resposta</span></dt>
+        <dd>
+          <span>{{ pergunta.resposta }}</span>
+        </dd>
+        <dt><span jhiTranslate="pageBoardApp.pergunta.paragrafo">Paragrafo</span></dt>
+        <dd>
+          <div *ngIf="pergunta.paragrafo">
+            <a [routerLink]="['/paragrafo', pergunta.paragrafo?.id, 'view']">{{ pergunta.paragrafo?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/pergunta', pergunta.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+{
+  "pageBoardApp": {
+    "pagina": {
+      "home": {
+        "title": "Paginas",
+        "refreshListLabel": "Atualizar lista",
+        "createLabel": "Criar novo Pagina",
+        "createOrEditLabel": "Criar ou editar Pagina",
+        "notFound": "Nenhum Pagina encontrado"
+      },
+      "created": "Um novo Pagina foi criado com o identificador {{ param }}",
+      "updated": "Um Pagina foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Pagina foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Pagina {{ id }}?"
+      },
+      "detail": {
+        "title": "Pagina"
+      },
+      "id": "ID",
+      "numero": "Numero",
+      "texto": "Texto",
+      "planoDeAula": "Plano De Aula",
+      "imagem": "Imagem",
+      "paragrafo": "Paragrafo",
+      "livro": "Livro"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "pageBoardApp": {
+    "projeto": {
+      "home": {
+        "title": "Projetos",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Projeto",
+        "createOrEditLabel": "Create or edit a Projeto",
+        "notFound": "No Projetos found"
+      },
+      "created": "A new Projeto is created with identifier {{ param }}",
+      "updated": "A Projeto is updated with identifier {{ param }}",
+      "deleted": "A Projeto is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Projeto {{ id }}?"
+      },
+      "detail": {
+        "title": "Projeto"
+      },
+      "id": "ID",
+      "nome": "Nome",
+      "descricao": "Descricao",
+      "imagem": "Imagem",
+      "tags": "Tags",
+      "usuario": "Usuario",
+      "livro": "Livro"
+    }
+  }
+}

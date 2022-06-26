@@ -1,0 +1,55 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="projeto">
+      <h2 data-cy="projetoDetailsHeading"><span jhiTranslate="pageBoardApp.projeto.detail.title">Projeto</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ projeto.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="pageBoardApp.projeto.nome">Nome</span></dt>
+        <dd>
+          <span>{{ projeto.nome }}</span>
+        </dd>
+        <dt><span jhiTranslate="pageBoardApp.projeto.descricao">Descricao</span></dt>
+        <dd>
+          <span>{{ projeto.descricao }}</span>
+        </dd>
+        <dt><span jhiTranslate="pageBoardApp.projeto.imagem">Imagem</span></dt>
+        <dd>
+          <div *ngIf="projeto.imagem">
+            <a (click)="openFile(projeto.imagem, projeto.imagemContentType)">
+              <img [src]="'data:' + projeto.imagemContentType + ';base64,' + projeto.imagem" style="max-width: 100%" alt="projeto image" />
+            </a>
+            {{ projeto.imagemContentType }}, {{ byteSize(projeto.imagem) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="pageBoardApp.projeto.tags">Tags</span></dt>
+        <dd>
+          <span>{{ projeto.tags }}</span>
+        </dd>
+        <dt><span jhiTranslate="pageBoardApp.projeto.usuario">Usuario</span></dt>
+        <dd>
+          <div *ngIf="projeto.usuario">
+            <a [routerLink]="['/usuario', projeto.usuario?.id, 'view']">{{ projeto.usuario?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/projeto', projeto.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

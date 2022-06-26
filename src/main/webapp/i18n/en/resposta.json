@@ -1,0 +1,24 @@
+{
+  "pageBoardApp": {
+    "resposta": {
+      "home": {
+        "title": "Respostas",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Resposta",
+        "createOrEditLabel": "Create or edit a Resposta",
+        "notFound": "No Respostas found"
+      },
+      "created": "A new Resposta is created with identifier {{ param }}",
+      "updated": "A Resposta is updated with identifier {{ param }}",
+      "deleted": "A Resposta is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Resposta {{ id }}?"
+      },
+      "detail": {
+        "title": "Resposta"
+      },
+      "id": "ID",
+      "texto": "Texto"
+    }
+  }
+}

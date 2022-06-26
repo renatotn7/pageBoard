@@ -1,0 +1,95 @@
+<div>
+  <h2 id="page-heading" data-cy="ProjetoHeading">
+    <span jhiTranslate="pageBoardApp.projeto.home.title">Projetos</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="pageBoardApp.projeto.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-projeto"
+        [routerLink]="['/projeto/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="pageBoardApp.projeto.home.createLabel"> Create a new Projeto </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="projetos?.length === 0">
+    <span jhiTranslate="pageBoardApp.projeto.home.notFound">No projetos found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="projetos && projetos.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="pageBoardApp.projeto.nome">Nome</span></th>
+          <th scope="col"><span jhiTranslate="pageBoardApp.projeto.descricao">Descricao</span></th>
+          <th scope="col"><span jhiTranslate="pageBoardApp.projeto.imagem">Imagem</span></th>
+          <th scope="col"><span jhiTranslate="pageBoardApp.projeto.tags">Tags</span></th>
+          <th scope="col"><span jhiTranslate="pageBoardApp.projeto.usuario">Usuario</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let projeto of projetos; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/projeto', projeto.id, 'view']">{{ projeto.id }}</a>
+          </td>
+          <td>{{ projeto.nome }}</td>
+          <td>{{ projeto.descricao }}</td>
+          <td>
+            <a *ngIf="projeto.imagem" (click)="openFile(projeto.imagem, projeto.imagemContentType)">
+              <img [src]="'data:' + projeto.imagemContentType + ';base64,' + projeto.imagem" style="max-height: 30px" alt="projeto image" />
+            </a>
+            <span *ngIf="projeto.imagem">{{ projeto.imagemContentType }}, {{ byteSize(projeto.imagem) }}</span>
+          </td>
+          <td>{{ projeto.tags }}</td>
+          <td>
+            <div *ngIf="projeto.usuario">
+              <a [routerLink]="['/usuario', projeto.usuario?.id, 'view']">{{ projeto.usuario?.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/projeto', projeto.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/projeto', projeto.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(projeto)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

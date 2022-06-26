@@ -1,0 +1,55 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="pagina">
+      <h2 data-cy="paginaDetailsHeading"><span jhiTranslate="pageBoardApp.pagina.detail.title">Pagina</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ pagina.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="pageBoardApp.pagina.numero">Numero</span></dt>
+        <dd>
+          <span>{{ pagina.numero }}</span>
+        </dd>
+        <dt><span jhiTranslate="pageBoardApp.pagina.texto">Texto</span></dt>
+        <dd>
+          <span>{{ pagina.texto }}</span>
+        </dd>
+        <dt><span jhiTranslate="pageBoardApp.pagina.planoDeAula">Plano De Aula</span></dt>
+        <dd>
+          <span>{{ pagina.planoDeAula }}</span>
+        </dd>
+        <dt><span jhiTranslate="pageBoardApp.pagina.imagem">Imagem</span></dt>
+        <dd>
+          <div *ngIf="pagina.imagem">
+            <a (click)="openFile(pagina.imagem, pagina.imagemContentType)">
+              <img [src]="'data:' + pagina.imagemContentType + ';base64,' + pagina.imagem" style="max-width: 100%" alt="pagina image" />
+            </a>
+            {{ pagina.imagemContentType }}, {{ byteSize(pagina.imagem) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="pageBoardApp.pagina.livro">Livro</span></dt>
+        <dd>
+          <div *ngIf="pagina.livro">
+            <a [routerLink]="['/livro', pagina.livro?.id, 'view']">{{ pagina.livro?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/pagina', pagina.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

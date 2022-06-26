@@ -1,0 +1,31 @@
+{
+  "pageBoardApp": {
+    "livro": {
+      "home": {
+        "title": "Livros",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Livro",
+        "createOrEditLabel": "Create or edit a Livro",
+        "notFound": "No Livros found"
+      },
+      "created": "A new Livro is created with identifier {{ param }}",
+      "updated": "A Livro is updated with identifier {{ param }}",
+      "deleted": "A Livro is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Livro {{ id }}?"
+      },
+      "detail": {
+        "title": "Livro"
+      },
+      "id": "ID",
+      "nomeLivro": "Nome Livro",
+      "editora": "Editora",
+      "autor": "Autor",
+      "anoDePublicacao": "Ano De Publicacao",
+      "tags": "Tags",
+      "pagina": "Pagina",
+      "projeto": "Projeto",
+      "assunto": "Assunto"
+    }
+  }
+}

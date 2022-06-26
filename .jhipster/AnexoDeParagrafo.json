@@ -1,0 +1,33 @@
+{
+  "applications": ["pageBoard"],
+  "changelogDate": "20220615215240",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "anexo_de_paragrafo",
+  "fields": [
+    {
+      "fieldName": "tipo",
+      "fieldType": "TipoAnexoDeParagrafo",
+      "fieldValues": "EXPLICACAO,SUMARIO,RESUMO,PLANO_DE_AULA"
+    },
+    {
+      "fieldName": "value",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "AnexoDeParagrafo",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "paragrafo",
+      "otherEntityRelationshipName": "anexoDeParagrafo",
+      "relationshipName": "paragrafo",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

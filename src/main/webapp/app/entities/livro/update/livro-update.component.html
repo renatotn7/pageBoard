@@ -1,0 +1,91 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-livro-heading" data-cy="LivroCreateUpdateHeading" jhiTranslate="pageBoardApp.livro.home.createOrEditLabel">
+        Create or edit a Livro
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pageBoardApp.livro.nomeLivro" for="field_nomeLivro">Nome Livro</label>
+          <input type="text" class="form-control" name="nomeLivro" id="field_nomeLivro" data-cy="nomeLivro" formControlName="nomeLivro" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pageBoardApp.livro.editora" for="field_editora">Editora</label>
+          <input type="text" class="form-control" name="editora" id="field_editora" data-cy="editora" formControlName="editora" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pageBoardApp.livro.autor" for="field_autor">Autor</label>
+          <input type="text" class="form-control" name="autor" id="field_autor" data-cy="autor" formControlName="autor" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pageBoardApp.livro.anoDePublicacao" for="field_anoDePublicacao">Ano De Publicacao</label>
+          <input
+            type="number"
+            class="form-control"
+            name="anoDePublicacao"
+            id="field_anoDePublicacao"
+            data-cy="anoDePublicacao"
+            formControlName="anoDePublicacao"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pageBoardApp.livro.tags" for="field_tags">Tags</label>
+          <textarea class="form-control" name="tags" id="field_tags" data-cy="tags" formControlName="tags"></textarea>
+        </div>
+
+        <div class="row mb-3">
+          <label jhiTranslate="pageBoardApp.livro.projeto" for="field_projetos">Projeto</label>
+          <select class="form-control" id="field_projetos" data-cy="projeto" multiple name="projetos" formControlName="projetos">
+            <option
+              [ngValue]="getSelectedProjeto(projetoOption, editForm.get('projetos')!.value)"
+              *ngFor="let projetoOption of projetosSharedCollection; trackBy: trackProjetoById"
+            >
+              {{ projetoOption.nome }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pageBoardApp.livro.assunto" for="field_assunto">Assunto</label>
+          <select class="form-control" id="field_assunto" data-cy="assunto" name="assunto" formControlName="assunto">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="assuntoOption.id === editForm.get('assunto')!.value?.id ? editForm.get('assunto')!.value : assuntoOption"
+              *ngFor="let assuntoOption of assuntosSharedCollection; trackBy: trackAssuntoById"
+            >
+              {{ assuntoOption.nome }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

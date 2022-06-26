@@ -1,0 +1,23 @@
+{
+  "pageBoardApp": {
+    "pageBoard": {
+      "home": {
+        "title": "Page Boards",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Page Board",
+        "createOrEditLabel": "Create or edit a Page Board",
+        "notFound": "No Page Boards found"
+      },
+      "created": "A new Page Board is created with identifier {{ param }}",
+      "updated": "A Page Board is updated with identifier {{ param }}",
+      "deleted": "A Page Board is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Page Board {{ id }}?"
+      },
+      "detail": {
+        "title": "Page Board"
+      },
+      "id": "ID"
+    }
+  }
+}

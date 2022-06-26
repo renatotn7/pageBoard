@@ -1,0 +1,45 @@
+{
+  "applications": ["pageBoard"],
+  "changelogDate": "20220615220140",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "paragrafo",
+  "fields": [
+    {
+      "fieldName": "numero",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "texto",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "resumo",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Paragrafo",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "questao",
+      "otherEntityName": "pergunta",
+      "otherEntityRelationshipName": "paragrafo",
+      "relationshipName": "pergunta",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "numero",
+      "otherEntityName": "pagina",
+      "otherEntityRelationshipName": "paragrafo",
+      "relationshipName": "pagina",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

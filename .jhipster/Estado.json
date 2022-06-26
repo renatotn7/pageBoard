@@ -1,0 +1,33 @@
+{
+  "applications": ["pageBoard"],
+  "changelogDate": "20220615215640",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "estado",
+  "fields": [
+    {
+      "fieldName": "nome",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "uf",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Estado",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "nome",
+      "otherEntityName": "pais",
+      "otherEntityRelationshipName": "estado",
+      "ownerSide": true,
+      "relationshipName": "pais",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "service": "no"
+}

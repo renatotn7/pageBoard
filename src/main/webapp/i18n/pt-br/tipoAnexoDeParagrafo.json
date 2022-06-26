@@ -1,0 +1,11 @@
+{
+  "pageBoardApp": {
+    "TipoAnexoDeParagrafo": {
+      "null": "",
+      "EXPLICACAO": "EXPLICACAO",
+      "SUMARIO": "SUMARIO",
+      "RESUMO": "RESUMO",
+      "PLANO_DE_AULA": "PLANO_DE_AULA"
+    }
+  }
+}

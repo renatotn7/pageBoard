@@ -1,0 +1,29 @@
+{
+  "applications": ["pageBoard"],
+  "changelogDate": "20220615215440",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "cidade",
+  "fields": [
+    {
+      "fieldName": "nome",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Cidade",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "nome",
+      "otherEntityName": "estado",
+      "otherEntityRelationshipName": "cidade",
+      "ownerSide": true,
+      "relationshipName": "estado",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "service": "no"
+}

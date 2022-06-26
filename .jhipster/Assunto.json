@@ -1,0 +1,28 @@
+{
+  "applications": ["pageBoard"],
+  "changelogDate": "20220615215340",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "assunto",
+  "fields": [
+    {
+      "fieldName": "nome",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Assunto",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "nomeLivro",
+      "otherEntityName": "livro",
+      "otherEntityRelationshipName": "assunto",
+      "relationshipName": "livro",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "no"
+}

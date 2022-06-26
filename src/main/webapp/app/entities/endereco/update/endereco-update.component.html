@@ -1,0 +1,125 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-endereco-heading" data-cy="EnderecoCreateUpdateHeading" jhiTranslate="pageBoardApp.endereco.home.createOrEditLabel">
+        Create or edit a Endereco
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pageBoardApp.endereco.logradouro" for="field_logradouro">Logradouro</label>
+          <input
+            type="text"
+            class="form-control"
+            name="logradouro"
+            id="field_logradouro"
+            data-cy="logradouro"
+            formControlName="logradouro"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pageBoardApp.endereco.numero" for="field_numero">Numero</label>
+          <input type="number" class="form-control" name="numero" id="field_numero" data-cy="numero" formControlName="numero" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pageBoardApp.endereco.complemento" for="field_complemento">Complemento</label>
+          <input
+            type="text"
+            class="form-control"
+            name="complemento"
+            id="field_complemento"
+            data-cy="complemento"
+            formControlName="complemento"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pageBoardApp.endereco.bairro" for="field_bairro">Bairro</label>
+          <input type="text" class="form-control" name="bairro" id="field_bairro" data-cy="bairro" formControlName="bairro" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pageBoardApp.endereco.cEP" for="field_cEP">C EP</label>
+          <input type="text" class="form-control" name="cEP" id="field_cEP" data-cy="cEP" formControlName="cEP" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pageBoardApp.endereco.cidade" for="field_cidade">Cidade</label>
+          <select class="form-control" id="field_cidade" data-cy="cidade" name="cidade" formControlName="cidade">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="cidadeOption.id === editForm.get('cidade')!.value?.id ? editForm.get('cidade')!.value : cidadeOption"
+              *ngFor="let cidadeOption of cidadesCollection; trackBy: trackCidadeById"
+            >
+              {{ cidadeOption.nome }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pageBoardApp.endereco.estado" for="field_estado">Estado</label>
+          <select class="form-control" id="field_estado" data-cy="estado" name="estado" formControlName="estado">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="estadoOption.id === editForm.get('estado')!.value?.id ? editForm.get('estado')!.value : estadoOption"
+              *ngFor="let estadoOption of estadosCollection; trackBy: trackEstadoById"
+            >
+              {{ estadoOption.nome }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pageBoardApp.endereco.pais" for="field_pais">Pais</label>
+          <select class="form-control" id="field_pais" data-cy="pais" name="pais" formControlName="pais">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="paisOption.id === editForm.get('pais')!.value?.id ? editForm.get('pais')!.value : paisOption"
+              *ngFor="let paisOption of paisCollection; trackBy: trackPaisById"
+            >
+              {{ paisOption.nome }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="pageBoardApp.endereco.pessoa" for="field_pessoa">Pessoa</label>
+          <select class="form-control" id="field_pessoa" data-cy="pessoa" name="pessoa" formControlName="pessoa">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="pessoaOption.id === editForm.get('pessoa')!.value?.id ? editForm.get('pessoa')!.value : pessoaOption"
+              *ngFor="let pessoaOption of pessoasSharedCollection; trackBy: trackPessoaById"
+            >
+              {{ pessoaOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

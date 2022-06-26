@@ -1,0 +1,49 @@
+{
+  "applications": ["pageBoard"],
+  "changelogDate": "20220615220440",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "projeto",
+  "fields": [
+    {
+      "fieldName": "nome",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "descricao",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "imagem",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "tags",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Projeto",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "usuario",
+      "otherEntityRelationshipName": "projeto",
+      "relationshipName": "usuario",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "nomeLivro",
+      "otherEntityName": "livro",
+      "otherEntityRelationshipName": "projeto",
+      "ownerSide": false,
+      "relationshipName": "livro",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "no"
+}
