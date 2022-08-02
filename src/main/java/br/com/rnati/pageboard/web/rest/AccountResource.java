@@ -15,6 +15,7 @@ import javax.validation.Valid;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ServerWebExchange;
@@ -25,6 +26,7 @@ import reactor.core.publisher.Mono;
  */
 @RestController
 @RequestMapping("/api")
+@Order(1)
 public class AccountResource {
 
     private static class AccountResourceException extends RuntimeException {

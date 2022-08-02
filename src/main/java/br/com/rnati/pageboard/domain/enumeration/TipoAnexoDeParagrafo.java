@@ -8,4 +8,8 @@ public enum TipoAnexoDeParagrafo {
     SUMARIO,
     RESUMO,
     PLANO_DE_AULA,
+    TXTSIMPLIFICADO,
+	TXTTOPICOS,
+	EXPLICATEXTO,
+	EXPLICATEXTOCTIT,
 }

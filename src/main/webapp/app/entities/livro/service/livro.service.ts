@@ -36,6 +36,15 @@ export class LivroService {
     const options = createRequestOption(req);
     return this.http.get<ILivro[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
+  queryByAndTags(tags: string): Observable<EntityArrayResponseType> {
+    return this.http.get<ILivro[]>(`${this.resourceUrl}/searchByTagsAnd/${tags}`, { observe: 'response' });
+  }
+  queryByText(text: string): Observable<EntityArrayResponseType> {
+    return this.http.get<ILivro[]>(`${this.resourceUrl}/searchByTexto/${text}`, { observe: 'response' });
+  }
+  queryByOrTags(tags: string): Observable<EntityArrayResponseType> {
+    return this.http.get<ILivro[]>(`${this.resourceUrl}/searchByTagsOr/${tags}`, { observe: 'response' });
+  }
 
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });

@@ -1,5 +1,6 @@
 package br.com.rnati.pageboard.web.rest;
 
+
 import br.com.rnati.pageboard.domain.AnexoDeParagrafo;
 import br.com.rnati.pageboard.repository.AnexoDeParagrafoRepository;
 import br.com.rnati.pageboard.web.rest.errors.BadRequestAlertException;
@@ -12,6 +13,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.annotation.Order;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -36,6 +38,7 @@ import tech.jhipster.web.util.reactive.ResponseUtil;
 @RestController
 @RequestMapping("/api")
 @Transactional
+@Order(1)
 public class AnexoDeParagrafoResource {
 
     private final Logger log = LoggerFactory.getLogger(AnexoDeParagrafoResource.class);
@@ -237,5 +240,13 @@ public class AnexoDeParagrafoResource {
                     .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
                     .build()
             );
+    }
+    @GetMapping("/anexo-de-paragrafos/findByParagrafo/{tipoAnexo}/{id}")
+    public Mono<List<AnexoDeParagrafo>> findByParagrafo(@PathVariable String tipoAnexo,@PathVariable Long id) {
+        log.debug("REST request to get Pergunta : {}", id);
+        Mono<List<AnexoDeParagrafo>> anexo = anexoDeParagrafoRepository.findByParagrafo(id,tipoAnexo).collectList();
+       
+        
+        return anexo;
     }
 }

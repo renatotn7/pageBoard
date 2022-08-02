@@ -23,7 +23,35 @@
   <jhi-alert-error></jhi-alert-error>
 
   <jhi-alert></jhi-alert>
-
+<!--ini card-->
+ 
+<div *ngIf="paginas && paginas.length > 0">
+  <div fxLayout="row wrap" fxLayoutGap="16px grid">
+  <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let pagina of paginas; trackBy: trackId" data-cy="entityTable">
+   
+  <div class="card" style="width: 18rem;">
+    <a *ngIf="pagina.imagem" (click)="openFile(pagina.imagem, pagina.imagemContentType)">
+      <img [src]="'data:' + pagina.imagemContentType + ';base64,' + pagina.imagem" style="max-height: 200px" alt="projeto image" />
+    </a>
+    <div class="card-body">
+    
+      <p class="card-text">{{ pagina.numero  }}</p>
+    </div>
+  <!--  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Tags</li>
+      <li class="list-group-item">A second item</li>
+      <li class="list-group-item">A third item</li>
+    </ul>
+    <div class="card-body">
+      <a href="#" class="card-link">Card link</a>
+      <a href="#" class="card-link">Another link</a>
+    </div>-->  
+</div>
+</div>
+</div>
+</div>
+  <!--fimcard-->
+ 
   <div class="alert alert-warning" id="no-result" *ngIf="paginas?.length === 0">
     <span jhiTranslate="pageBoardApp.pagina.home.notFound">No paginas found</span>
   </div>
@@ -44,7 +72,7 @@
       <tbody>
         <tr *ngFor="let pagina of paginas; trackBy: trackId" data-cy="entityTable">
           <td>
-            <a [routerLink]="['/pagina', pagina.id, 'view']">{{ pagina.id }}</a>
+          <!--****-->  <a [routerLink]="['/pagina', pagina.id, 'view']">{{ pagina.id }}</a>
           </td>
           <td>{{ pagina.numero }}</td>
           <td>{{ pagina.texto }}</td>
@@ -67,9 +95,14 @@
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
               </button>
 
-              <button type="submit" [routerLink]="['/pagina', pagina.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+              <!--****-->  <button type="submit" [routerLink]="['/pagina', pagina.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
                 <fa-icon icon="pencil-alt"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+              
+              <!--****-->  <button type="submit" [routerLink]="['/../page-board',pagina.id,'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" >Editv2</span>
               </button>
 
               <button type="submit" (click)="delete(pagina)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">

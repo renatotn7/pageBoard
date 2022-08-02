@@ -6,6 +6,7 @@ import { PaginaComponent } from '../list/pagina.component';
 import { PaginaDetailComponent } from '../detail/pagina-detail.component';
 import { PaginaUpdateComponent } from '../update/pagina-update.component';
 import { PaginaRoutingResolveService } from './pagina-routing-resolve.service';
+import { PageBoardComponent } from '../../page-board/list/page-board.component';
 
 const paginaRoute: Routes = [
   {
@@ -32,6 +33,19 @@ const paginaRoute: Routes = [
   {
     path: ':id/edit',
     component: PaginaUpdateComponent,
+    resolve: {
+      pagina: PaginaRoutingResolveService,
+    },
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: ':id/edit',
+    data: { pageTitle: 'pageBoardApp.pageBoard.home.title' },
+    loadChildren: () => import('../../page-board/page-board.module').then(m => m.PageBoardModule),
+  },
+  {
+    path: ':id/editpb',
+    component: PageBoardComponent,
     resolve: {
       pagina: PaginaRoutingResolveService,
     },

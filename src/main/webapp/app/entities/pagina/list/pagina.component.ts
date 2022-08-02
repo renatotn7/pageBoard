@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { IPagina } from '../pagina.model';
@@ -7,15 +7,18 @@ import { PaginaService } from '../service/pagina.service';
 import { PaginaDeleteDialogComponent } from '../delete/pagina-delete-dialog.component';
 import { DataUtils } from 'app/core/util/data-util.service';
 
+
 @Component({
   selector: 'jhi-pagina',
   templateUrl: './pagina.component.html',
+  styleUrls: ['./pagina.component.scss']
 })
 export class PaginaComponent implements OnInit {
   paginas?: IPagina[];
   isLoading = false;
 
-  constructor(protected paginaService: PaginaService, protected dataUtils: DataUtils, protected modalService: NgbModal) {}
+  constructor(protected paginaService: PaginaService, protected dataUtils: DataUtils, protected modalService: NgbModal,
+    ) {}
 
   loadAll(): void {
     this.isLoading = true;
@@ -57,4 +60,5 @@ export class PaginaComponent implements OnInit {
       }
     });
   }
+  
 }

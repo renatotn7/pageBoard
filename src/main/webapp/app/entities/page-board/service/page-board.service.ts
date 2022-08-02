@@ -6,6 +6,7 @@ import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { IPageBoard, getPageBoardIdentifier } from '../page-board.model';
+import { IParagrafo } from '../../paragrafo/paragrafo.model';
 
 export type EntityResponseType = HttpResponse<IPageBoard>;
 export type EntityArrayResponseType = HttpResponse<IPageBoard[]>;

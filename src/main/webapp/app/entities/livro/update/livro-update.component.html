@@ -40,9 +40,17 @@
           />
         </div>
 
-        <div class="row mb-3">
+        <!--<div class="row mb-3">
           <label class="form-label" jhiTranslate="pageBoardApp.livro.tags" for="field_tags">Tags</label>
           <textarea class="form-control" name="tags" id="field_tags" data-cy="tags" formControlName="tags"></textarea>
+        </div>-->
+        <div class="p-fluid">
+          <label class="form-label" jhiTranslate="pageBoardApp.livro.tags" for="field_tags">Tags (Clique virgula para adicionar)</label>
+          <p-chips [(ngModel)]="values1" formControlName="tags" id="q" separator=",">
+            <ng-template let-item pTemplate="item">
+              {{ item }}
+            </ng-template>
+          </p-chips>
         </div>
 
         <div class="row mb-3">

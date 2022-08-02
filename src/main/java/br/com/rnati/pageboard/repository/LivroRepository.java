@@ -29,6 +29,11 @@ public interface LivroRepository extends ReactiveCrudRepository<Livro, Long>, Li
     )
     Flux<Livro> findByProjeto(Long id);
 
+    @Query(
+        "SELECT * FROM livro entity WHERE entity.nome_livro like CONCAT('%',:texto,'%') or entity.editora like  CONCAT('%',:texto,'%') or entity.autor like  CONCAT('%',:texto,'%') "
+    )
+    Flux<Livro> findByLikeTexto(String texto);
+
     @Query("SELECT * FROM livro entity WHERE entity.assunto_id = :id")
     Flux<Livro> findByAssunto(Long id);
 
@@ -56,7 +61,8 @@ interface LivroRepositoryInternal {
     Flux<Livro> findAll();
 
     Mono<Livro> findById(Long id);
-    // this is not supported at the moment because of https://github.com/jhipster/generator-jhipster/issues/18269
+    // this is not supported at the moment because of
+    // https://github.com/jhipster/generator-jhipster/issues/18269
     // Flux<Livro> findAllBy(Pageable pageable, Criteria criteria);
 
     Mono<Livro> findOneWithEagerRelationships(Long id);

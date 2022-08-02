@@ -5,7 +5,9 @@
 /* ==========================================================================
 Navbar
 ========================================================================== */
-
+.navbar.bg-primary {
+  background-image: linear-gradient(#0c1e35, #1c2e45 60%, #0c1e35);
+}
 .navbar-version {
   font-size: 0.65em;
   color: $navbar-dark-color;
@@ -21,7 +23,7 @@ Navbar
   .dropdown-item.active,
   .dropdown-item.active:focus,
   .dropdown-item.active:hover {
-    background-color: $dark;
+    background-color: #0c1e35;
   }
 
   a.nav-link {

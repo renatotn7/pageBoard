@@ -21,6 +21,7 @@
         <div class="row mb-3">
           <label class="form-label" jhiTranslate="pageBoardApp.pagina.texto" for="field_texto">Texto</label>
           <textarea class="form-control" name="texto" id="field_texto" data-cy="texto" formControlName="texto"></textarea>
+          <ckeditor [editor]="Editor" [data]="model.editorData" (change)="onChangeEditor($event)"></ckeditor>
         </div>
 
         <div class="row mb-3">

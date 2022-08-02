@@ -1,34 +1,100 @@
-<div class="d-flex justify-content-center">
-  <div class="col-8">
-    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2 id="jhi-page-board-heading" data-cy="PageBoardCreateUpdateHeading" jhiTranslate="pageBoardApp.pageBoard.home.createOrEditLabel">
-        Create or edit a Page Board
-      </h2>
 
-      <div>
-        <jhi-alert-error></jhi-alert-error>
 
-        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
-          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
-          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
-        </div>
+<div style="border-bottom: 2px solid rgb(177, 217, 233);margin-bottom:30px">
+  <h2  id="page-heading" data-cy="LivroHeading">
+      <span >PageBoard</span>
+</h2>
+</div>
+<div fxLayout="row wrap" fxLayoutGap="10px grid">
+    
+     
+      <div  fxFlex="50%"  fxFlex.xs="100%" fxFlex.sm="33%" >
+      <h4>Texto</h4>
+            <div style="border-right: 2px solid rgb(177, 217, 233);border-bottom: 2px solid rgb(177, 217, 233);border-top: 2px solid rgb(177, 217, 233);">
+
+<div *ngFor="let paragrafo of paragrafos; index as indexelement;" >
+    <div id="pagragrafo_{{paragrafo.id}}"(click)='loadperguntas(paragrafo,indexelement)' class="{{paragrafosCss[indexelement]}}"> <!--[ngClass]="getClass(indexelement)"-->
+        {{paragrafo.texto}}
       </div>
+   <br/>
+    <!--<button (click)='loadperguntas(paragrafo)'>Perguntas</button>-->
+</div> 
+</div>
+<div class="center-text">
+<button type="button" style="background-color:  #5d0707 !important; color:rgb(221, 233, 237);  margin-left:15px;  margin-bottom:15px;" class="btn">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
+            <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
+          </svg>&nbsp;Editar&nbsp;</button>
+</div>
+</div>
 
-      <div>
-        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
-          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-        </button>
+<div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="33%" >
+      <h4>Recursos</h4>
+      <!--<div class="btn-group"  role="group" aria-label="Basic example">
+            <button type="button" style="background-color: #06365a !important; color:lightblue" class="btn">Perguntas</button>
+            <button type="button" style="background-color: #06365a !important; color:lightblue" class="btn">Texto Facilitado</button>
+             <button type="button" style="background-color: #06365a !important; color:lightblue" class="btn">Resumo</button>
+          </div>-->
+          <ul class="nav nav-pills nav-fill" style="margin-bottom:30px">
+            <li class="nav-item">
+              <a class="nav-link {{perguntasPanelActiveCss}}" (click)='showPerguntasPanel()'>Perguntas</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {{facilitadoPanelActiveCss}}" (click)='showFacilitadoPanel()'>Texto Facilitado</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {{resumoPanelActiveCss}}" (click)='showResumoPanel()'>Resumo</a>
+            </li>
+            <li class="nav-item">
+                  <a class="nav-link {{ExpTitPanelActiveCss}}" (click)='showExpTitPanel()'>Explica em Tópicos</a>
+            </li>
+          
+          </ul>
+        
+<span *ngIf="isPerguntasVisible" #panelPerguntas>  
+<div *ngFor="let pergunta of perguntas;" >
+ 
+      {{pergunta.questao}} 
+      <div *ngIf="showRespota">{{pergunta.resposta}}</div> 
+      <br/>
+</div> 
+</span>    
+<span *ngIf="isAnexoFacilitadoVisible" #panelFacilitado>  
+      <div *ngFor="let anexo of anexosDeParagrafo;" >
 
-        <button
-          type="submit"
-          id="save-entity"
-          data-cy="entityCreateSaveButton"
-          [disabled]="editForm.invalid || isSaving"
-          class="btn btn-primary"
-        >
-          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
-        </button>
-      </div>
-    </form>
-  </div>
+            {{anexo.value}} 
+           
+      </div> 
+      </span>    
+      <span *ngIf="isAnexoResumoVisible" #panelResumo>  
+            <div *ngFor="let anexo of anexosDeParagrafo;" >
+             
+                   {{anexo.value}} 
+                  
+            </div> 
+            </span>  
+            <span *ngIf="isExpTitVisible" #panelExpTit>  
+                  <div *ngFor="let anexo of anexosDeParagrafo;" >
+                   
+                         {{anexo.value}} 
+                        
+                  </div> 
+                  </span>  
+      <div class="vertical-center">
+            <button (click)="saveAnexo()" type="button" style="background-color: #010000 !important; color:rgb(221, 233, 237); margin-bottom:15px;" class="btn">
+            salvarTeste     
+            </button>
+           
+            <button (click)="generateQuestion()" type="button" style="background-color: #010000 !important; color:rgb(221, 233, 237); margin-bottom:15px;" class="btn">
+            
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
+            <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
+            <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
+          </svg>&nbsp;Gerar&nbsp;</button>
+</div>
+
+<button *ngIf="!showRespota && perguntas!=null && perguntas.length>0"  class="btn btn-lg btn-primary" (click)='showResp()'>Resposta</button>
+<button *ngIf="showRespota" class="btn btn-lg btn-primary" (click)='hideResp()'>Ocultar</button>
+</div>
+
 </div>

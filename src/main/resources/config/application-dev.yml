@@ -16,8 +16,8 @@
 logging:
   level:
     ROOT: DEBUG
-    tech.jhipster: DEBUG
-    org.hibernate.SQL: DEBUG
+    tech.jhipster: INFO
+    org.hibernate.SQL: INFO
     br.com.rnati.pageboard: DEBUG
 
 spring:
@@ -26,18 +26,15 @@ spring:
       enabled: true
       additional-exclude: static/**,.h2.server.properties
     livereload:
-      enabled: false # we use Webpack dev server + BrowserSync for livereload
+      enabled: true # we use Webpack dev server + BrowserSync for livereload
   jackson:
     serialization:
       indent-output: true
-  h2:
-    console:
-      # disable spring boot built-in h2-console since we start it manually with correct configuration
-      enabled: false
+
   liquibase:
-    # Remove 'faker' if you do not want the sample data to be loaded automatically
+    # Remove 'faker' if you do not want the sample data to be loaded automatically   url: jdbc:h2:file:./target/h2db/db/pageboard;DB_CLOSE_DELAY=-1
     contexts: dev, faker
-    url: jdbc:h2:file:./target/h2db/db/pageboard;DB_CLOSE_DELAY=-1
+    url: jdbc:postgresql://database-1.cyyl4okuwnrs.us-east-1.rds.amazonaws.com:5432/pageBoard
   mail:
     host: localhost
     port: 25
@@ -46,9 +43,10 @@ spring:
   messages:
     cache-duration: PT1S # 1 second, see the ISO 8601 standard
   r2dbc:
-    url: r2dbc:h2:file://././target/h2db/db/pageboard;DB_CLOSE_DELAY=-1
-    username: pageBoard
-    password:
+    # url: r2dbc:h2:file://././target/h2db/db/pageboard;DB_CLOSE_DELAY=-1
+    url: r2dbc:postgresql://database-1.cyyl4okuwnrs.us-east-1.rds.amazonaws.com:5432/pageBoard
+    username: postgres
+    password: Abc,1234
   thymeleaf:
     cache: false
   sleuth:

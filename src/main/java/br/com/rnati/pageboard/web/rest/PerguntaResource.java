@@ -201,7 +201,14 @@ public class PerguntaResource {
         Mono<Pergunta> pergunta = perguntaRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(pergunta);
     }
-
+    @GetMapping("/perguntas/findByParagrafo/{id}")
+    public Mono<List<Pergunta>> findByParagrafo(@PathVariable Long id) {
+        log.debug("REST request to get Pergunta : {}", id);
+        Mono<List<Pergunta>> pergunta = perguntaRepository.findByParagrafo(id).collectList();
+       
+        
+        return pergunta;
+    }
     /**
      * {@code DELETE  /perguntas/:id} : delete the "id" pergunta.
      *

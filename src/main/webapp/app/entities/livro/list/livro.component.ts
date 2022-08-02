@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -6,17 +6,93 @@ import { ILivro } from '../livro.model';
 import { LivroService } from '../service/livro.service';
 import { LivroDeleteDialogComponent } from '../delete/livro-delete-dialog.component';
 import { DataUtils } from 'app/core/util/data-util.service';
+import { Chips } from 'primeng/chips';
 
 @Component({
   selector: 'jhi-livro',
   templateUrl: './livro.component.html',
+  styleUrls: ['./livro.component.scss'],
+ 
 })
 export class LivroComponent implements OnInit {
   livros?: ILivro[];
+  textForSearch: any;
   isLoading = false;
-
-  constructor(protected livroService: LivroService, protected dataUtils: DataUtils, protected modalService: NgbModal) {}
-
+  tagsCss:string[]; 
+  isTableVisible=false;
+  isCardsVisible=true;
+  isBuscaTextoVisible=true;
+  isBuscaTagsVisible=false;
+  @ViewChild('cardsVisibility')
+  cardsVisibility!: ElementRef;
+  @ViewChild('tableVisibility')
+  tableVisibility!: ElementRef;
+  tags1=""
+  @ViewChild('buscaTextoComponent')
+  buscaTextoComponent!: ElementRef;
+  @ViewChild('buscaTagsComponent')
+  buscaTagsComponent!: ElementRef;
+  selectedValue: string;
+  @ViewChild('chipcomponent', {static: false}) chipcomponent!: ElementRef;
+    
+  constructor(protected livroService: LivroService, protected dataUtils: DataUtils, protected modalService: NgbModal) {
+    this.tagsCss=['bluetag','yelowtag','greentag','orangetag']
+    this.selectedValue="or";
+  }
+  toggleListVisible():void{
+    this.isTableVisible= !this.isTableVisible;
+    this.isCardsVisible=!this.isCardsVisible;
+  }
+  toggleBuscaVisible():void{
+    
+    this.isBuscaTextoVisible= !this.isBuscaTextoVisible;
+    this.isBuscaTagsVisible=!this.isBuscaTagsVisible;
+    if(this.isBuscaTagsVisible){
+      
+      this.chipcomponent.nativeElement.click();
+    }
+  }
+  findByText():void{
+    this.livroService.queryByText(this.textForSearch).subscribe({
+      next: (res: HttpResponse<ILivro[]>) => {
+      //  alert(1);
+        this.isLoading = false;
+        this.livros = res.body ?? [];
+      },
+      error: () => {
+        this.isLoading = false;
+      },
+    });
+  }
+  
+  findByTagsAnd():void{
+    if(this.selectedValue==="and"){
+    this.livroService.queryByAndTags(this.tags1).subscribe({
+      next: (res: HttpResponse<ILivro[]>) => {
+      //  alert(1);
+        this.isLoading = false;
+        this.livros = res.body ?? [];
+      },
+      error: () => {
+        this.isLoading = false;
+      },
+    });
+  }
+  if(this.selectedValue==="or"){
+    this.livroService.queryByOrTags(this.tags1).subscribe({
+      next: (res: HttpResponse<ILivro[]>) => {
+      //  alert(1);
+        this.isLoading = false;
+        this.livros = res.body ?? [];
+      },
+      error: () => {
+        this.isLoading = false;
+      },
+    });
+  }
+    
+  }
+ 
   loadAll(): void {
     this.isLoading = true;
 
@@ -57,4 +133,8 @@ export class LivroComponent implements OnInit {
       }
     });
   }
+  splitTag(tag: string):string[] {
+    return tag.split(';');
+}
+
 }

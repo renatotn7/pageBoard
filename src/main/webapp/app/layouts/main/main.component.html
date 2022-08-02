@@ -3,11 +3,16 @@
 <div>
   <router-outlet name="navbar"></router-outlet>
 </div>
-
-<div class="container-fluid">
-  <div class="card jh-card">
-    <router-outlet></router-outlet>
+<div class="row">
+  <div style="height: 100%; position: relative; display: block" class="col-md-2 jh-card">
+    <jhi-app-sidebar></jhi-app-sidebar>
   </div>
-
-  <jhi-footer></jhi-footer>
+  <div class="col-md-10">
+    <div class="container-fluid">
+      <div class="card jh-card">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
 </div>
+<jhi-footer></jhi-footer>

@@ -6,6 +6,8 @@ import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { IPagina, getPaginaIdentifier } from '../pagina.model';
+import { IParagrafo } from '../../paragrafo/paragrafo.model';
+import { IAnexoDeParagrafo } from '../../anexo-de-paragrafo/anexo-de-paragrafo.model';
 
 export type EntityResponseType = HttpResponse<IPagina>;
 export type EntityArrayResponseType = HttpResponse<IPagina[]>;
@@ -24,6 +26,21 @@ export class PaginaService {
     return this.http.put<IPagina>(`${this.resourceUrl}/${getPaginaIdentifier(pagina) as number}`, pagina, { observe: 'response' });
   }
 
+  createBlocos(pagina: IPagina): Observable<HttpResponse<IParagrafo[]>> {
+    return this.http.post<IParagrafo[]>(`${this.resourceUrl}/bloco/criaBlocosDeTexto`, pagina, { observe: 'response' });
+  }
+  generatePerguntas(paragrafo: IParagrafo): Observable<HttpResponse<IParagrafo>> {
+    return this.http.post<IParagrafo>(`${this.resourceUrl}/bloco/perguntasDiscursivas`, paragrafo, { observe: 'response' });
+  }
+  generateTextoFacilitado(paragrafo: IParagrafo): Observable<HttpResponse<IParagrafo>> {
+    return this.http.post<IParagrafo>(`${this.resourceUrl}/bloco/textoSimplificado`, paragrafo, { observe: 'response' });
+  }
+  generateEmTopicos(paragrafo: IParagrafo): Observable<HttpResponse<IParagrafo>> {
+    return this.http.post<IParagrafo>(`${this.resourceUrl}/bloco/topicos`, paragrafo, { observe: 'response' });
+  }
+  generateEmTitulos(paragrafo: IParagrafo): Observable<HttpResponse<IParagrafo>> {
+    return this.http.post<IParagrafo>(`${this.resourceUrl}/bloco/explicaEmTitulos`, paragrafo, { observe: 'response' });
+  }
   partialUpdate(pagina: IPagina): Observable<EntityResponseType> {
     return this.http.patch<IPagina>(`${this.resourceUrl}/${getPaginaIdentifier(pagina) as number}`, pagina, { observe: 'response' });
   }

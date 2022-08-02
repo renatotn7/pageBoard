@@ -105,7 +105,9 @@ class AnexoDeParagrafoRepositoryInternalImpl
 
     private AnexoDeParagrafo process(Row row, RowMetadata metadata) {
         AnexoDeParagrafo entity = anexodeparagrafoMapper.apply(row, "e");
-        entity.setParagrafo(paragrafoMapper.apply(row, "paragrafo"));
+        entity.setParagrafoId(paragrafoMapper.apply(row, "paragrafo").getId());
+
+        // entity.setParagrafo(paragrafoMapper.apply(row, "paragrafo"));
         return entity;
     }
 

@@ -56,6 +56,10 @@
       <button type="button" [routerLink]="['/livro', livro.id, 'edit']" class="btn btn-primary">
         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
       </button>
+      <button type="submit" (click)="delete(livro)" class="btn btn-danger" data-cy="entityDeleteButton">
+        <fa-icon icon="times"></fa-icon>
+        <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+      </button>
     </div>
   </div>
 </div>

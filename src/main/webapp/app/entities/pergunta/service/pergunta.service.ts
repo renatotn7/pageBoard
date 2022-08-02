@@ -19,7 +19,9 @@ export class PerguntaService {
   create(pergunta: IPergunta): Observable<EntityResponseType> {
     return this.http.post<IPergunta>(this.resourceUrl, pergunta, { observe: 'response' });
   }
-
+  findByParagrafo(id: number): Observable<EntityArrayResponseType> {
+    return this.http.get<IPergunta[]>(`${this.resourceUrl}/findByParagrafo/${id}`, { observe: 'response' });
+  }
   update(pergunta: IPergunta): Observable<EntityResponseType> {
     return this.http.put<IPergunta>(`${this.resourceUrl}/${getPerguntaIdentifier(pergunta) as number}`, pergunta, { observe: 'response' });
   }

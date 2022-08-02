@@ -14,16 +14,19 @@ import { IProjeto } from 'app/entities/projeto/projeto.model';
 import { ProjetoService } from 'app/entities/projeto/service/projeto.service';
 import { IAssunto } from 'app/entities/assunto/assunto.model';
 import { AssuntoService } from 'app/entities/assunto/service/assunto.service';
-
+import {MenuItem} from 'primeng/api';
 @Component({
   selector: 'jhi-livro-update',
   templateUrl: './livro-update.component.html',
+  styleUrls: ['./livro-update.component.scss'],
 })
 export class LivroUpdateComponent implements OnInit {
   isSaving = false;
 
   projetosSharedCollection: IProjeto[] = [];
   assuntosSharedCollection: IAssunto[] = [];
+  values1: string[];
+  livro:Livro;
 
   editForm = this.fb.group({
     id: [],
@@ -44,13 +47,22 @@ export class LivroUpdateComponent implements OnInit {
     protected assuntoService: AssuntoService,
     protected activatedRoute: ActivatedRoute,
     protected fb: FormBuilder
-  ) {}
+  ) {
+
+    this.livro={}
+    this.values1=[]
+  }
 
   ngOnInit(): void {
+   
     this.activatedRoute.data.subscribe(({ livro }) => {
+      this.livro=livro;
+    
+    //  console.log( '')
       this.updateForm(livro);
 
       this.loadRelationshipsOptions();
+      this.values1=this.livro.tags!.split(';')
     });
   }
 
@@ -74,8 +86,10 @@ export class LivroUpdateComponent implements OnInit {
   }
 
   save(): void {
+  
     this.isSaving = true;
-    const livro = this.createFromForm();
+     const livro:ILivro = this.createFromForm();
+     livro.tags= this.values1.join(";");
     if (livro.id !== undefined) {
       this.subscribeToSaveResponse(this.livroService.update(livro));
     } else {

@@ -15,6 +15,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.function.BiFunction;
+import javax.persistence.criteria.CriteriaBuilder;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.r2dbc.convert.R2dbcConverter;
 import org.springframework.data.r2dbc.core.R2dbcEntityOperations;
@@ -101,6 +102,21 @@ class LivroRepositoryInternalImpl extends SimpleR2dbcRepository<Livro, Long> imp
     @Override
     public Mono<Livro> findById(Long id) {
         Comparison whereClause = Conditions.isEqual(entityTable.column("id"), Conditions.just(id.toString()));
+        return createQuery(null, whereClause).one();
+    }
+
+    //@Override
+    public Mono<Livro> findByOrTag(String tags) {
+        String[] atagsLivro = tags.split(";");
+
+        Comparison whereClause = Conditions.isEqual(Conditions.just("1"), Conditions.just("1"));
+        // whereClause = whereClause.and(Conditions.in(Conditions.just("1"),"1"));
+        for (int i = 1; i < atagsLivro.length; i++) {
+            String tag = atagsLivro[i];
+            //	  whereClause = Conditions.isEqual(entityTable.column("id"), Conditions.just(id.toString()))
+        }
+        //  whereClause = Conditions.isEqual(entityTable.column("id"), Conditions.just(id.toString())).or;
+
         return createQuery(null, whereClause).one();
     }
 

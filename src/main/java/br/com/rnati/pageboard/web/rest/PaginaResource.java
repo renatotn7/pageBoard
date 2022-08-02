@@ -1,22 +1,40 @@
 package br.com.rnati.pageboard.web.rest;
 
-import br.com.rnati.pageboard.domain.Pagina;
-import br.com.rnati.pageboard.repository.PaginaRepository;
-import br.com.rnati.pageboard.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
+
+import br.com.rnati.pageboard.client.service.NucleoClientService;
+import br.com.rnati.pageboard.domain.Pagina;
+import br.com.rnati.pageboard.domain.PaginaEParagrafo;
+import br.com.rnati.pageboard.domain.Paragrafo;
+import br.com.rnati.pageboard.enumerator.TipoAnexo;
+import br.com.rnati.pageboard.repository.AnexoDeParagrafoRepository;
+import br.com.rnati.pageboard.repository.PaginaRepository;
+import br.com.rnati.pageboard.repository.ParagrafoRepository;
+import br.com.rnati.pageboard.repository.PerguntaRepository;
+import br.com.rnati.pageboard.web.rest.errors.BadRequestAlertException;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import tech.jhipster.web.util.HeaderUtil;
@@ -28,8 +46,9 @@ import tech.jhipster.web.util.reactive.ResponseUtil;
 @RestController
 @RequestMapping("/api")
 @Transactional
+@Order(1)
 public class PaginaResource {
-
+	NucleoClientService nucleoService;
     private final Logger log = LoggerFactory.getLogger(PaginaResource.class);
 
     private static final String ENTITY_NAME = "pagina";
@@ -38,11 +57,75 @@ public class PaginaResource {
     private String applicationName;
 
     private final PaginaRepository paginaRepository;
-
-    public PaginaResource(PaginaRepository paginaRepository) {
+    private final ParagrafoRepository paragrafoRepository;
+    private final PerguntaRepository perguntaRepository;
+    private final AnexoDeParagrafoRepository anexoRepository;
+    public PaginaResource(PaginaRepository paginaRepository,ParagrafoRepository paragrafoRepository, PerguntaRepository perguntaRepository,AnexoDeParagrafoRepository anexoRepository) {
         this.paginaRepository = paginaRepository;
+        this.paragrafoRepository=paragrafoRepository;
+        this.perguntaRepository=perguntaRepository;
+        this.anexoRepository=anexoRepository;
+       nucleoService=new NucleoClientService(paginaRepository,paragrafoRepository,perguntaRepository,anexoRepository);
     }
 
+    @PostMapping("/paginas/bloco/perguntasDiscursivas")
+    public Mono<Paragrafo> perguntasDiscursivas(@RequestBody Paragrafo paragrafo) {
+    	//getPagina
+    	//GetParagrafo (deve ser criados quando o texto for salvo)
+    	Paragrafo p = nucleoService.prepareToGetFromNucleo(paragrafo, TipoAnexo.PERGUNTARESPOSTADISC);
+    	
+    	return	Mono.just(p);
+    
+    }
+    @PostMapping("/paginas/bloco/resumo")
+    public Mono<Paragrafo> resumo(@RequestBody Paragrafo paragrafo) {
+    	//getPagina
+    	//GetParagrafo (deve ser criados quando o texto for salvo)
+    	
+    	return	Mono.just(nucleoService.prepareToGetFromNucleo(paragrafo, TipoAnexo.TXTSIMPLIFICADO));
+    
+    }
+    @PostMapping("/paginas/bloco/textoSimplificado")
+    public Mono<Paragrafo> textoSimplificado(@RequestBody Paragrafo paragrafo) {
+    	//getPagina
+    	//GetParagrafo (deve ser criados quando o texto for salvo)
+    	
+    	return	Mono.just(nucleoService.prepareToGetFromNucleo(paragrafo, TipoAnexo.TXTSIMPLIFICADO));
+    
+    }
+    @PostMapping("/paginas/bloco/topicos")
+    public Mono<Paragrafo> txtTopicos(@RequestBody Paragrafo paragrafo) {
+    	//getPagina
+    	//GetParagrafo (deve ser criados quando o texto for salvo)
+    	
+    	return	Mono.just(nucleoService.prepareToGetFromNucleo(paragrafo, TipoAnexo.TXTTOPICOS));
+    
+    }
+    @PostMapping("/paginas/bloco/explicaEmTitulos")
+    public Mono<Paragrafo> txtEmTitulos(@RequestBody Paragrafo paragrafo) {
+    	//getPagina
+    	//GetParagrafo (deve ser criados quando o texto for salvo)
+    	
+    	return	Mono.just(nucleoService.prepareToGetFromNucleo(paragrafo, TipoAnexo.EXPLICATEXTOCTIT));
+    
+    }
+
+    @PostMapping("paginas/bloco/criaBlocosDeTexto")
+    public Mono<List<Paragrafo> > criaBlocosDeTexto(@RequestBody Pagina pagina){
+    		System.out.println("***********************");
+    		
+        	return nucleoService.getBlocos(pagina);
+
+    }
+    @PostMapping("/paragrafo/perguntasMultiplaEscolhas")
+    public Mono<Paragrafo> perguntasME(@RequestBody Paragrafo paragrafo) {
+    	//getPagina
+    	//GetParagrafo (deve ser criados quando o texto for salvo)
+    	
+    	return Mono.just(nucleoService.prepareToGetFromNucleo(paragrafo, TipoAnexo.PERGUNTARESPOSTAMULT));
+    	//return null;
+    }
+    
     /**
      * {@code POST  /paginas} : Create a new pagina.
      *
@@ -50,6 +133,9 @@ public class PaginaResource {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new pagina, or with status {@code 400 (Bad Request)} if the pagina has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
+  
+    
+    
     @PostMapping("/paginas")
     public Mono<ResponseEntity<Pagina>> createPagina(@RequestBody Pagina pagina) throws URISyntaxException {
         log.debug("REST request to save Pagina : {}", pagina);
@@ -230,4 +316,16 @@ public class PaginaResource {
                     .build()
             );
     }
+
+	public PaginaRepository getPaginaRepository() {
+		return paginaRepository;
+	}
+
+	public ParagrafoRepository getParagrafoRepository() {
+		return paragrafoRepository;
+	}
+
+	public PerguntaRepository getPerguntaRepository() {
+		return perguntaRepository;
+	}
 }

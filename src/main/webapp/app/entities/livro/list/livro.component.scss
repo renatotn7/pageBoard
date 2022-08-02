@@ -1,0 +1,84 @@
+.mdb-color.lighten-2 {
+    background-color: #7283a7 !important;
+  }
+
+.field{
+    margin-bottom:15px !important;
+    margin-top:15px !important;
+}
+.bluetag{
+    background-color: #7283a7 !important;
+    color: rgba(249, 251, 252, 0.881);
+}
+.yelowtag{
+    background-color: rgb(247, 250, 159)!important;
+    color:black;
+}   
+.orangetag{
+    background-color: rgb(255, 233, 173)!important;
+    color:black;
+}   
+.greentag{
+    background-color: rgb(173, 224, 178)!important;
+    color:black;
+}
+
+#abc{border: 1px solid #ced4da !important;box-sizing: border-box !important;}
+  //https://mdbootstrap.com/docs/standard/components/chips/
+  .chip {
+   
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    box-sizing: border-box;
+   
+    cursor: pointer;
+    display: inline-block;
+    font-family: Roboto, sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    height: 25px;
+    line-height: 25px;
+    margin-bottom: 3px;
+    margin-right: 6px;
+    padding-bottom: 0px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 0px;
+    text-size-adjust: 100%;
+    transition-delay: 0s;
+    transition-duration: 0.3s;
+    transition-property: all;
+    transition-timing-function: linear;
+   
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    
+  }
+  .waves-effect {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  .close {
+    float: right;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .5;
+  }
+  .fa, .fas {
+    font-weight: 900;
+  }
+  .fa, .far, .fas {
+    font-family: "Font Awesome 5 Free";
+  }
+  

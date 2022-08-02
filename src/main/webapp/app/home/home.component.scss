@@ -1,7 +1,9 @@
 /* ==========================================================================
 Main page styles
 ========================================================================== */
-
+.homeheader {
+  color: #0e2b4f;
+}
 .hipster {
   display: inline-block;
   width: 347px;
@@ -20,4 +22,112 @@ Main page styles
     background: url('../../content/images/jhipster_family_member_3.svg') no-repeat center top;
     background-size: contain;
   }
+}
+.mdb-color.lighten-2 {
+  background-color: #7283a7 !important;
+}
+.chip {
+  background-color: rgb(236, 239, 241);
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  box-sizing: border-box;
+  color: rgba(249, 251, 252, 0.6);
+  cursor: pointer;
+  display: inline-block;
+  font-family: Roboto, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  height: 32px;
+  line-height: 32px;
+  margin-bottom: 6px;
+  margin-right: 6px;
+  padding-bottom: 0px;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 0px;
+  text-size-adjust: 100%;
+  transition-delay: 0s;
+  transition-duration: 0.3s;
+  transition-property: all;
+  transition-timing-function: linear;
+
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+.waves-effect {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.chip .close {
+  float: right;
+  padding-left: 8px;
+  font-size: 16px;
+  line-height: 32px;
+  cursor: pointer;
+  -webkit-transition: all 0.1s linear;
+  transition: all 0.1s linear;
+}
+.close {
+  float: right;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  opacity: 0.5;
+}
+.fa,
+.fas {
+  font-weight: 900;
+}
+.fa,
+.far,
+.fas {
+  font-family: 'Font Awesome 5 Free';
+}
+.chips {
+  border-bottom-color: rgb(206, 212, 218);
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-image-outset: 0;
+  border-image-repeat: stretch;
+  border-image-slice: 100%;
+  border-image-source: none;
+  border-image-width: 1;
+  border-left-color: rgb(0, 0, 0);
+  border-left-style: none;
+  border-left-width: 0px;
+  border-right-color: rgb(0, 0, 0);
+  border-right-style: none;
+  border-right-width: 0px;
+  border-top-color: rgb(0, 0, 0);
+  border-top-style: none;
+  border-top-width: 0px;
+  box-shadow: none;
+  box-sizing: border-box;
+  display: block;
+  font-family: Roboto, sans-serif;
+  font-weight: 300;
+  height: 65px;
+  line-height: 18.4px;
+  margin-bottom: 30px;
+  min-height: 45px;
+  outline-color: rgb(0, 0, 0);
+  outline-style: none;
+  outline-width: 0px;
+  padding-bottom: 16px;
+  text-size-adjust: 100%;
+  transition-delay: 0s;
+  transition-duration: 0.3s;
+  transition-property: all;
+  transition-timing-function: ease;
+
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }

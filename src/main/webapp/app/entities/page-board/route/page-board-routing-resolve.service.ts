@@ -12,7 +12,9 @@ export class PageBoardRoutingResolveService implements Resolve<IPageBoard> {
   constructor(protected service: PageBoardService, protected router: Router) {}
 
   resolve(route: ActivatedRouteSnapshot): Observable<IPageBoard> | Observable<never> {
+  
     const id = route.params['id'];
+   /*alert('resolve');
     if (id) {
       return this.service.find(id).pipe(
         mergeMap((pageBoard: HttpResponse<PageBoard>) => {
@@ -24,7 +26,7 @@ export class PageBoardRoutingResolveService implements Resolve<IPageBoard> {
           }
         })
       );
-    }
+    }*/
     return of(new PageBoard());
   }
 }

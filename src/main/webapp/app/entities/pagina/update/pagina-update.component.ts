@@ -1,5 +1,5 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -12,15 +12,23 @@ import { EventManager, EventWithContent } from 'app/core/util/event-manager.serv
 import { DataUtils, FileLoadError } from 'app/core/util/data-util.service';
 import { ILivro } from 'app/entities/livro/livro.model';
 import { LivroService } from 'app/entities/livro/service/livro.service';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { ChangeEvent } from '@ckeditor/ckeditor5-angular';
 
 @Component({
   selector: 'jhi-pagina-update',
   templateUrl: './pagina-update.component.html',
+  styleUrls: ['./pagina-update.component.scss'],
 })
 export class PaginaUpdateComponent implements OnInit {
   isSaving = false;
-
+  public Editor = ClassicEditor;
+  public editorData = '<p>Hello, world!</p>';
   livrosSharedCollection: ILivro[] = [];
+  text!: string;
+  public model = {
+    editorData: '<p>Hello, world!</p>',
+  };
 
   editForm = this.fb.group({
     id: [],
@@ -45,7 +53,7 @@ export class PaginaUpdateComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ pagina }) => {
       this.updateForm(pagina);
-
+      this.model.editorData = pagina.texto;
       this.loadRelationshipsOptions();
     });
   }
@@ -78,11 +86,16 @@ export class PaginaUpdateComponent implements OnInit {
   previousState(): void {
     window.history.back();
   }
-
+  public onChangeEditor({ editor }: ChangeEvent): void {
+    const data = editor.getData();
+    this.model.editorData = data;
+  }
   save(): void {
     this.isSaving = true;
     const pagina = this.createFromForm();
+
     if (pagina.id !== undefined) {
+      pagina.texto = this.model.editorData;
       this.subscribeToSaveResponse(this.paginaService.update(pagina));
     } else {
       this.subscribeToSaveResponse(this.paginaService.create(pagina));

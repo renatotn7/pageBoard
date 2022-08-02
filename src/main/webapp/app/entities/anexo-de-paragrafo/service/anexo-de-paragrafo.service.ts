@@ -17,9 +17,14 @@ export class AnexoDeParagrafoService {
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
   create(anexoDeParagrafo: IAnexoDeParagrafo): Observable<EntityResponseType> {
+
     return this.http.post<IAnexoDeParagrafo>(this.resourceUrl, anexoDeParagrafo, { observe: 'response' });
   }
-
+  findByParagrafo(id: number,tipo: string): Observable<EntityArrayResponseType> {
+   const urlfinal=`${this.resourceUrl}/findByParagrafo/${tipo}/${id}`;
+   
+    return this.http.get<IAnexoDeParagrafo[]>(urlfinal, { observe: 'response' });
+  }
   update(anexoDeParagrafo: IAnexoDeParagrafo): Observable<EntityResponseType> {
     return this.http.put<IAnexoDeParagrafo>(
       `${this.resourceUrl}/${getAnexoDeParagrafoIdentifier(anexoDeParagrafo) as number}`,

@@ -17,8 +17,8 @@ import reactor.core.publisher.Mono;
 public interface AnexoDeParagrafoRepository extends ReactiveCrudRepository<AnexoDeParagrafo, Long>, AnexoDeParagrafoRepositoryInternal {
     Flux<AnexoDeParagrafo> findAllBy(Pageable pageable);
 
-    @Query("SELECT * FROM anexo_de_paragrafo entity WHERE entity.paragrafo_id = :id")
-    Flux<AnexoDeParagrafo> findByParagrafo(Long id);
+    @Query("SELECT * FROM anexo_de_paragrafo entity WHERE entity.paragrafo_id = :id and entity.tipo=:tipo")
+    Flux<AnexoDeParagrafo> findByParagrafo(Long id, String tipo);
 
     @Query("SELECT * FROM anexo_de_paragrafo entity WHERE entity.paragrafo_id IS NULL")
     Flux<AnexoDeParagrafo> findAllWhereParagrafoIsNull();

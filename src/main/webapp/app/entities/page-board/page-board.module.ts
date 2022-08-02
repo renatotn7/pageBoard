@@ -5,9 +5,9 @@ import { PageBoardDetailComponent } from './detail/page-board-detail.component';
 import { PageBoardUpdateComponent } from './update/page-board-update.component';
 import { PageBoardDeleteDialogComponent } from './delete/page-board-delete-dialog.component';
 import { PageBoardRoutingModule } from './route/page-board-routing.module';
-
+import { FlexLayoutModule } from '@angular/flex-layout';
 @NgModule({
-  imports: [SharedModule, PageBoardRoutingModule],
+  imports: [SharedModule, PageBoardRoutingModule, FlexLayoutModule],
   declarations: [PageBoardComponent, PageBoardDetailComponent, PageBoardUpdateComponent, PageBoardDeleteDialogComponent],
   entryComponents: [PageBoardDeleteDialogComponent],
 })

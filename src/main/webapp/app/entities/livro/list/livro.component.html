@@ -1,8 +1,11 @@
+
 <div>
   <h2 id="page-heading" data-cy="LivroHeading">
     <span jhiTranslate="pageBoardApp.livro.home.title">Livros</span>
 
     <div class="d-flex justify-content-end">
+      
+     
       <button class="btn btn-info me-2" (click)="loadAll()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
         <span jhiTranslate="pageBoardApp.livro.home.refreshListLabel">Refresh List</span>
@@ -19,71 +22,148 @@
       </button>
     </div>
   </h2>
-
-  <jhi-alert-error></jhi-alert-error>
+  <div class="field " *ngIf="isBuscaTextoVisible else buscaTagComponent" #buscaTextoComponent>
+    <span class="p-float-label p-input-icon-left col-md-12">
+        <i class="pi pi-search"></i>
+        <input type="text" id="inputtext-left" class="col-md-12" pInputText [(ngModel)]="textForSearch" (keyup.enter)="findByText()"> 
+        <label for="inputtext-left">Busca (Pressione Enter para buscar)</label>
+    </span>
+</div>
+<ng-template  #buscaTagComponent>
+<div  class="p-fluid" >
+  
+  <label class="form-label"  for="field_tags">Busca por Tags (Clique virgula para adicionar)</label>
+  <p-chips [(ngModel)]="tags1" separator="," (keyup.enter)="findByTagsAnd()"> </p-chips>
+  <!--<p-chips #chipcomponent   inputId="abc" [(ngModel)]="tags1"  formControlName="tags"  id="q" separator=",">
+      selectedValue: string;
+    <ng-template let-item pTemplate="item">
+        {{item}} 
+    </ng-template> 
+</p-chips>--> 
+</div>
+</ng-template>
+<div class="row" style="padding-bottom:15px">
+<div class=" col-md-6">
+<span (click)="toggleBuscaVisible()">Busca por {{!isBuscaTextoVisible ? 'texto' : 'tags'}} </span> | <span (click)="toggleListVisible()">Ver como {{isCardsVisible ? 'tabela' : 'itens'}}</span> 
+</div>
+<div class=" col-md-6">
+  <span *ngIf="!isBuscaTextoVisible">
+<p-radioButton name="groupname" value="and" [(ngModel)]="selectedValue" label="Deve conter todas as tags&nbsp;&nbsp;&nbsp;"> </p-radioButton>
+<p-radioButton name="groupname" value="or" [(ngModel)]="selectedValue" label="Deve conter pelo menos uma das tags"></p-radioButton> 
+</span>
+</div>
+</div>
+<jhi-alert-error></jhi-alert-error>
 
   <jhi-alert></jhi-alert>
-
+  <div id="cardsVisibility" *ngIf="isCardsVisible" #cardsVisibility >
+    <div *ngIf="livros && livros.length > 0">
+        <div fxLayout="row wrap" fxLayoutGap="16px grid">
+          <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let livro of livros; trackBy: trackId; " data-cy="entityTable">
+          
+            <div class="card" style="width: 18rem;">
+              
+              <div class="card-body">
+                <h5 class="card-title" [routerLink]="['/livro', livro.id, 'view']">{{ livro.nomeLivro }}</h5>
+                <p class="card-text">{{ livro.editora }}</p>
+                <div fxLayout="row wrap">
+                  <div *ngFor="let tag of splitTag(livro.tags ? livro.tags:''); index as indexelement"  >
+                    <div class="chip   waves-effect  {{tagsCss[indexelement%tagsCss.length]}}">
+                      {{tag}}
+                    
+                    
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            <!--  <ul class="list-group list-group-flush">
+              <li class="list-group-item">Tags</li>
+                <li class="list-group-item">A second item</li>
+                <li class="list-group-item">A third item</li>
+              </ul>
+              <div class="card-body">
+                <a href="#" class="card-link">Card link</a>
+                <a href="#" class="card-link">Another link</a>
+              </div>-->  
+        </div>
+      </div>
+    </div>
+   </div>
+  </div>
   <div class="alert alert-warning" id="no-result" *ngIf="livros?.length === 0">
     <span jhiTranslate="pageBoardApp.livro.home.notFound">No livros found</span>
   </div>
+  <div id="tableVisibility" *ngIf="isTableVisible" #tableVisibility>
+    <div class="table-responsive" id="entities" *ngIf="livros && livros.length > 0">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr>
+            <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+            <th scope="col"><span jhiTranslate="pageBoardApp.livro.nomeLivro">Nome Livro</span></th>
+            <th scope="col"><span jhiTranslate="pageBoardApp.livro.editora">Editora</span></th>
+            <th scope="col"><span jhiTranslate="pageBoardApp.livro.autor">Autor</span></th>
+            <th scope="col"><span jhiTranslate="pageBoardApp.livro.anoDePublicacao">Ano De Publicacao</span></th>
+            <th scope="col"><span jhiTranslate="pageBoardApp.livro.tags">Tags</span></th>
+            <th scope="col"><span jhiTranslate="pageBoardApp.livro.projeto">Projeto</span></th>
+            <th scope="col"><span jhiTranslate="pageBoardApp.livro.assunto">Assunto</span></th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let livro of livros; trackBy: trackId" data-cy="entityTable">
+            <td>
+              <a [routerLink]="['/livro', livro.id, 'view']">{{ livro.id }}</a>
+            </td>
+            <td>{{ livro.nomeLivro }}</td>
+            <td>{{ livro.editora }}</td>
+            <td>{{ livro.autor }}</td>
+            <td>{{ livro.anoDePublicacao }}</td>
+            <td>
+              <div fxLayout="row wrap">
+                <div *ngFor="let tag of splitTag(livro.tags ? livro.tags:''); index as indexelement"  >
+                  <div class="chip   waves-effect  {{tagsCss[indexelement%tagsCss.length]}}">
+                    {{tag}}
+                  
+                  
+                  </div>
+                  
+                  </div>
+                </div>
 
-  <div class="table-responsive" id="entities" *ngIf="livros && livros.length > 0">
-    <table class="table table-striped" aria-describedby="page-heading">
-      <thead>
-        <tr>
-          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
-          <th scope="col"><span jhiTranslate="pageBoardApp.livro.nomeLivro">Nome Livro</span></th>
-          <th scope="col"><span jhiTranslate="pageBoardApp.livro.editora">Editora</span></th>
-          <th scope="col"><span jhiTranslate="pageBoardApp.livro.autor">Autor</span></th>
-          <th scope="col"><span jhiTranslate="pageBoardApp.livro.anoDePublicacao">Ano De Publicacao</span></th>
-          <th scope="col"><span jhiTranslate="pageBoardApp.livro.tags">Tags</span></th>
-          <th scope="col"><span jhiTranslate="pageBoardApp.livro.projeto">Projeto</span></th>
-          <th scope="col"><span jhiTranslate="pageBoardApp.livro.assunto">Assunto</span></th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let livro of livros; trackBy: trackId" data-cy="entityTable">
-          <td>
-            <a [routerLink]="['/livro', livro.id, 'view']">{{ livro.id }}</a>
-          </td>
-          <td>{{ livro.nomeLivro }}</td>
-          <td>{{ livro.editora }}</td>
-          <td>{{ livro.autor }}</td>
-          <td>{{ livro.anoDePublicacao }}</td>
-          <td>{{ livro.tags }}</td>
-          <td>
-            <span *ngFor="let projeto of livro.projetos; let last = last">
-              <a class="form-control-static" [routerLink]="['/projeto', projeto.id, 'view']">{{ projeto.nome }}</a
-              >{{ last ? '' : ', ' }}
-            </span>
-          </td>
-          <td>
-            <div *ngIf="livro.assunto">
-              <a [routerLink]="['/assunto', livro.assunto?.id, 'view']">{{ livro.assunto?.nome }}</a>
-            </div>
-          </td>
-          <td class="text-end">
-            <div class="btn-group">
-              <button type="submit" [routerLink]="['/livro', livro.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
-                <fa-icon icon="eye"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-              </button>
+            </td>
+            <td>
+              <span *ngFor="let projeto of livro.projetos; let last = last">
+                <a class="form-control-static" [routerLink]="['/projeto', projeto.id, 'view']">{{ projeto.nome }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            </td>
+            <td>
+              <div *ngIf="livro.assunto">
+                <a [routerLink]="['/assunto', livro.assunto?.id, 'view']">{{ livro.assunto?.nome }}</a>
+              </div>
+            </td>
+            <td class="text-end">
+              <div class="btn-group">
+                <button type="submit" [routerLink]="['/livro', livro.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                  <fa-icon icon="eye"></fa-icon>
+                  <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                </button>
 
-              <button type="submit" [routerLink]="['/livro', livro.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
-                <fa-icon icon="pencil-alt"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-              </button>
+                <button type="submit" [routerLink]="['/livro', livro.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                  <fa-icon icon="pencil-alt"></fa-icon>
+                  <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                </button>
 
-              <button type="submit" (click)="delete(livro)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
-                <fa-icon icon="times"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-              </button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+                <button type="submit" (click)="delete(livro)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                  <fa-icon icon="times"></fa-icon>
+                  <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

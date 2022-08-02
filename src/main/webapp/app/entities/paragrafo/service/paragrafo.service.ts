@@ -19,7 +19,9 @@ export class ParagrafoService {
   create(paragrafo: IParagrafo): Observable<EntityResponseType> {
     return this.http.post<IParagrafo>(this.resourceUrl, paragrafo, { observe: 'response' });
   }
-
+  findByPagina(id: number): Observable<EntityArrayResponseType> {
+    return this.http.get<IParagrafo[]>(`${this.resourceUrl}/findByPagina/${id}`, { observe: 'response' });
+  }
   update(paragrafo: IParagrafo): Observable<EntityResponseType> {
     return this.http.put<IParagrafo>(`${this.resourceUrl}/${getParagrafoIdentifier(paragrafo) as number}`, paragrafo, {
       observe: 'response',

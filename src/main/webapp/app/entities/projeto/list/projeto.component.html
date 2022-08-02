@@ -23,7 +23,54 @@
   <jhi-alert-error></jhi-alert-error>
 
   <jhi-alert></jhi-alert>
+  <!--ini card-->
 
+  <div *ngIf="projetos && projetos.length > 0">
+    <div fxLayout="row wrap" fxLayoutGap="16px grid">
+      <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let projeto of projetos; trackBy: trackId" data-cy="entityTable">
+        <div class="card" style="width: 18rem">
+          <a *ngIf="projeto.imagem" (click)="openFile(projeto.imagem, projeto.imagemContentType)">
+            <img [src]="'data:' + projeto.imagemContentType + ';base64,' + projeto.imagem" style="max-height: 200px" alt="projeto image" />
+          </a>
+          <div class="card-body">
+            <h5 class="card-title">{{ projeto.nome }}</h5>
+            <p class="card-text">{{ projeto.descricao }}</p>
+            <div fxLayout="row wrap">
+              <div *ngFor="let tag of splitTag(projeto.tags ? projeto.tags : ''); index as indexelement">
+                <div class="chip   waves-effect  {{ tagsCss[indexelement % tagsCss.length] }}">
+                  {{ tag }}
+                  <svg
+                    class="close fas fa-times bi-x"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-x"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Tags</li>
+      <li class="list-group-item">A second item</li>
+      <li class="list-group-item">A third item</li>
+    </ul>
+    <div class="card-body">
+      <a href="#" class="card-link">Card link</a>
+      <a href="#" class="card-link">Another link</a>
+    </div>-->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--fimcard-->
   <div class="alert alert-warning" id="no-result" *ngIf="projetos?.length === 0">
     <span jhiTranslate="pageBoardApp.projeto.home.notFound">No projetos found</span>
   </div>

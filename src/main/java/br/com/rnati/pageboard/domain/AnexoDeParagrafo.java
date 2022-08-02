@@ -26,10 +26,10 @@ public class AnexoDeParagrafo implements Serializable {
     @Column("value")
     private String value;
 
-    @Transient
-    @JsonIgnoreProperties(value = { "perguntas", "pagina" }, allowSetters = true)
+    /*  @Transient
+    @JsonIgnoreProperties(value = { "perguntas", "pagina","anexos" }, allowSetters = true)
     private Paragrafo paragrafo;
-
+*/
     @Column("paragrafo_id")
     private Long paragrafoId;
 
@@ -74,19 +74,19 @@ public class AnexoDeParagrafo implements Serializable {
         this.value = value;
     }
 
-    public Paragrafo getParagrafo() {
+    /*public Paragrafo getParagrafo() {
         return this.paragrafo;
     }
 
     public void setParagrafo(Paragrafo paragrafo) {
         this.paragrafo = paragrafo;
         this.paragrafoId = paragrafo != null ? paragrafo.getId() : null;
-    }
+    }*/
 
-    public AnexoDeParagrafo paragrafo(Paragrafo paragrafo) {
+    /*public AnexoDeParagrafo paragrafo(Paragrafo paragrafo) {
         this.setParagrafo(paragrafo);
         return this;
-    }
+    }*/
 
     public Long getParagrafoId() {
         return this.paragrafoId;

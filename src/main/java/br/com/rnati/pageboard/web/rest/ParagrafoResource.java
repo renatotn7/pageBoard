@@ -225,4 +225,12 @@ public class ParagrafoResource {
                     .build()
             );
     }
+    @GetMapping("/paragrafos/findByPagina/{id}")
+    public Mono<List<Paragrafo>> findByPagina(@PathVariable Long id) {
+        log.debug("REST request to get Paragrafo : {}", id);
+        Mono<List<Paragrafo>> paragrafo = paragrafoRepository.findByPagina(id).collectList();
+       
+        
+        return paragrafo;
+    }
 }

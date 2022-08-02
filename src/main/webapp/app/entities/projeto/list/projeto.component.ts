@@ -10,12 +10,15 @@ import { DataUtils } from 'app/core/util/data-util.service';
 @Component({
   selector: 'jhi-projeto',
   templateUrl: './projeto.component.html',
+  styleUrls: ['./projeto.component.scss'],
 })
 export class ProjetoComponent implements OnInit {
   projetos?: IProjeto[];
   isLoading = false;
-
-  constructor(protected projetoService: ProjetoService, protected dataUtils: DataUtils, protected modalService: NgbModal) {}
+  tagsCss: string[];
+  constructor(protected projetoService: ProjetoService, protected dataUtils: DataUtils, protected modalService: NgbModal) {
+    this.tagsCss = ['bluetag', 'yelowtag', 'greentag', 'orangetag'];
+  }
 
   loadAll(): void {
     this.isLoading = true;
@@ -56,5 +59,8 @@ export class ProjetoComponent implements OnInit {
         this.loadAll();
       }
     });
+  }
+  splitTag(tag: string): string[] {
+    return tag.split(';');
   }
 }

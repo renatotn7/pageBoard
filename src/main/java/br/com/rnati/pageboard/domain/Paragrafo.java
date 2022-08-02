@@ -2,7 +2,9 @@ package br.com.rnati.pageboard.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
@@ -29,6 +31,10 @@ public class Paragrafo implements Serializable {
 
     @Column("resumo")
     private String resumo;
+
+    @Transient
+    @JsonIgnoreProperties(value = { "paragrafo" }, allowSetters = true)
+    private List<AnexoDeParagrafo> anexos = new ArrayList<>();
 
     @Transient
     @JsonIgnoreProperties(value = { "paragrafo" }, allowSetters = true)
@@ -114,6 +120,14 @@ public class Paragrafo implements Serializable {
         return this;
     }
 
+    public Paragrafo addAnexo(AnexoDeParagrafo anexo) {
+        anexo.setParagrafoId(this.id);
+        this.anexos.add(anexo);
+        //anexo.setParagrafo(this);
+
+        return this;
+    }
+
     public Paragrafo addPergunta(Pergunta pergunta) {
         this.perguntas.add(pergunta);
         pergunta.setParagrafo(this);
@@ -176,5 +190,13 @@ public class Paragrafo implements Serializable {
             ", texto='" + getTexto() + "'" +
             ", resumo='" + getResumo() + "'" +
             "}";
+    }
+
+    public List<AnexoDeParagrafo> getAnexos() {
+        return anexos;
+    }
+
+    public void setAnexos(List<AnexoDeParagrafo> anexos) {
+        this.anexos = anexos;
     }
 }
